@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SPQR — Atlante di Roma. Dalla fondazione alla caduta</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
+<style>
+  .leaflet-tile-container img{ width:257px !important; height:257px !important; }
+  .leaflet-zoom-animated{ will-change:transform; }
+  .leaflet-tile{ will-change:transform; backface-visibility:hidden; }
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.Default.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/leaflet.markercluster.js"></script>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+  :root{
+    --marmo:#ece3d1; --marmo-scuro:#ddcda3; --ink:#26190f; --ink-soft:#4d3a26;
+
+    --regno:#7a4a25;
+    --repubblica:#8a1f1f;
+    --principato:#4b2e6b;
+    --crisi:#8a6a1f;
+    --occidente:#33506e;
+    --oriente:#6b1f5c;
+
+    --won:#8a1f1f; --lost:#343a48; --uncertain:#c49619;
+    --siege-imp:#a67c3d; --siege-suf:#7a1f1f; --revolt:#7a3f9e;
+
+    --gold:#a67c3d; --line:#c2a878;
+  }
+  *{box-sizing:border-box;}
+  html,body{height:100%; margin:0; font-family:'EB Garamond', serif; color:var(--ink); background:var(--marmo);}
+  h1,h2,h3,#app>header, .cat-row b{ font-family:'Cinzel', serif; letter-spacing:.02em; }
+
+  #app{ display:flex; height:100vh; width:100vw; overflow:hidden; }
+
+  #sidebar{
+    width:340px; min-width:260px; max-width:520px; flex-shrink:0;
+    background:var(--marmo); border-right:2px solid var(--line);
+    display:flex; flex-direction:column; padding:14px 14px 8px; overflow-y:auto;
+  }
+  #sidebar h1{ font-size:19px; margin:0 0 2px; color:var(--repubblica); }
+  #sidebar .subtitle{ font-size:12px; color:var(--ink-soft); margin:0 0 10px; font-style:italic;}
+
+  #stat-year-block{
+    background:#fff; border:1px solid var(--line); border-radius:6px;
+    padding:8px 10px; margin-bottom:10px; text-align:center;
+  }
+  #stat-year{ font-family:'Cinzel',serif; font-size:24px; color:var(--principato); }
+  #stat-label{ font-size:12px; color:var(--ink-soft); }
+
+  .cat-row{ display:flex; align-items:center; gap:8px; font-size:13px; padding:3px 2px; cursor:pointer; }
+  .cat-row input{ accent-color:var(--principato); flex-shrink:0; }
+  .swatch{ width:14px; height:14px; display:inline-block; flex-shrink:0; border:1px solid rgba(0,0,0,.25); }
+  .swatch.round{ border-radius:50%; }
+
+  fieldset{ border:1px solid var(--line); border-radius:6px; margin:0 0 10px; padding:8px 10px; }
+  legend{ font-family:'Cinzel',serif; font-size:11.5px; padding:0 6px; color:var(--ink-soft); }
+
+  button{ font-family:'EB Garamond', serif; font-size:13px; cursor:pointer; }
+  #sidebar button{
+    background:#fff; border:1px solid var(--line); border-radius:5px;
+    padding:6px 10px; margin:3px 0; text-align:left;
+  }
+  #sidebar button:hover{ background:var(--marmo-scuro); }
+
+  #mapCol{ flex:1; display:flex; flex-direction:column; min-width:0; }
+  #map{ flex:1; position:relative; min-height:0; }
+  .map-btn{
+    position:absolute; z-index:500; background:#fff; border:1px solid var(--line);
+    border-radius:5px; padding:5px 9px; box-shadow:0 1px 3px rgba(0,0,0,.25);
+  }
+  #fullscreenBtn{ top:10px; right:10px; }
+  #legendToggleBtn{ top:10px; right:150px; }
+
+  #timeline{
+    flex-shrink:0; background:#f4ecd8; border-top:2px solid var(--line);
+    display:flex; align-items:center; gap:8px; padding:10px 14px; position:relative; z-index:500;
+  }
+  #yearSlider{ flex:1; accent-color:var(--repubblica); }
+  #yearReadout{ font-family:'Cinzel',serif; min-width:74px; text-align:center; font-size:14px;}
+  .nudgeBtn, #playBtn{ background:#fff; border:1px solid var(--line); border-radius:5px; padding:4px 8px; }
+
+  .leaflet-popup-content{ font-family:'EB Garamond', serif; font-size:14px; line-height:1.4; }
+  .lat-name{ font-style:italic; color:var(--ink-soft); }
+  .popup-era{ display:inline-block; font-size:11px; padding:1px 6px; border-radius:3px; color:#fff; margin-top:4px; }
+  .popup-kind{ display:inline-block; font-size:11px; padding:1px 6px; border-radius:3px; color:#fff; margin-top:4px; margin-left:4px;}
+
+  #legendPanel{
+    position:absolute; top:50px; right:10px; z-index:500; background:#fffdf7;
+    border:1px solid var(--line); border-radius:6px; padding:10px 12px; max-width:260px;
+    box-shadow:0 2px 8px rgba(0,0,0,.2); max-height:70vh; overflow-y:auto;
+  }
+  #legendPanel h3{ margin:8px 0 6px; font-size:13px; }
+  #legendPanel h3:first-child{ margin-top:0; }
+  #legendPanel .row{ display:flex; align-items:center; gap:6px; font-size:12.5px; margin:3px 0; }
+
+  @media (max-width:900px){
+    #app{ flex-direction:column; }
+    #sidebar{ width:100%; max-width:none; max-height:36vh; border-right:none; border-bottom:2px solid var(--line); }
+    #mapCol{ flex:1; min-height:0; }
+  }
+</style>
+</head>
+<body>
+
+<div id="app">
+  <div id="sidebar">
+    <header><h1>SPQR — Atlante di Roma</h1></header>
+    <p class="subtitle">Dalla fondazione (753 a.C.) alla caduta di Costantinopoli (1453 d.C.)</p>
+
+    <div id="stat-year-block">
+      <div id="stat-year">753 a.C.</div>
+      <div id="stat-label">eventi attivi: <b id="stat-count">–</b></div>
+    </div>
+
+    <label class="cat-row"><input type="checkbox" id="allTimeToggle" checked>
+      <span class="swatch" style="background:var(--gold);"></span>
+      <b>Mostra tutte le epoche</b> (ignora l'anno)
+    </label>
+
+    <fieldset>
+      <legend>Epoche / status amministrativo</legend>
+      <label class="cat-row"><input type="checkbox" class="erabox" value="regno" checked><span class="swatch" style="background:var(--regno)"></span>Regno di Roma <span style="color:#999">(753–509 a.C.)</span></label>
+      <label class="cat-row"><input type="checkbox" class="erabox" value="repubblica" checked><span class="swatch" style="background:var(--repubblica)"></span>Repubblica <span style="color:#999">(509–27 a.C.)</span></label>
+      <label class="cat-row"><input type="checkbox" class="erabox" value="principato" checked><span class="swatch" style="background:var(--principato)"></span>Principato / Alto Impero <span style="color:#999">(27 a.C.–284 d.C.)</span></label>
+      <label class="cat-row"><input type="checkbox" class="erabox" value="crisi" checked><span class="swatch" style="background:var(--crisi)"></span>Crisi del III sec. / Tetrarchia <span style="color:#999">(235–324 d.C.)</span></label>
+      <label class="cat-row"><input type="checkbox" class="erabox" value="occidente" checked><span class="swatch" style="background:var(--occidente)"></span>Impero d'Occidente <span style="color:#999">(395–476 d.C.)</span></label>
+      <label class="cat-row"><input type="checkbox" class="erabox" value="oriente" checked><span class="swatch" style="background:var(--oriente)"></span>Impero d'Oriente / Bisanzio <span style="color:#999">(395–1453 d.C.)</span></label>
+    </fieldset>
+
+    <fieldset>
+      <legend>Battaglie (esito)</legend>
+      <label class="cat-row"><input type="checkbox" class="filterbox" id="wonToggle" checked><span class="swatch round" style="background:radial-gradient(circle,#fff1a8,#ffb032 45%,var(--won) 78%);"></span>Vittorie romane</label>
+      <label class="cat-row"><input type="checkbox" class="filterbox" id="lostToggle" checked><span class="swatch round" style="background:radial-gradient(circle,#fff1a8,#ffb032 45%,var(--lost) 78%);"></span>Sconfitte romane</label>
+      <label class="cat-row"><input type="checkbox" class="filterbox" id="uncertainToggle" checked><span class="swatch round" style="background:radial-gradient(circle,#fff1a8,#ffb032 45%,var(--uncertain) 78%);"></span>Esito incerto</label>
+    </fieldset>
+
+    <fieldset>
+      <legend>Assedi e rivolte</legend>
+      <label class="cat-row"><input type="checkbox" class="filterbox" id="siegeImposedToggle" checked><span class="swatch round" style="background:radial-gradient(circle,#ffe8b0,var(--siege-imp) 75%);border:1.5px solid #6b4e1f;"></span>Assedi imposti da Roma</label>
+      <label class="cat-row"><input type="checkbox" class="filterbox" id="siegeSufferedToggle" checked><span class="swatch round" style="background:radial-gradient(circle,#ffe0d8,var(--siege-suf) 75%);border:1.5px dashed #4a1010;"></span>Assedi subiti da Roma</label>
+      <label class="cat-row"><input type="checkbox" class="filterbox" id="revoltToggle" checked><span class="swatch round" style="background:radial-gradient(circle,#ecd8fa,var(--revolt) 75%);"></span>Rivolte e guerre civili</label>
+    </fieldset>
+
+    <fieldset>
+      <legend>Vie imperiali</legend>
+      <label class="cat-row"><input type="checkbox" id="roadsToggle" checked><span class="swatch" style="background:repeating-linear-gradient(90deg,#5a4326 0 5px,transparent 5px 9px);"></span>Strade romane (clicca per il nome)</label>
+    </fieldset>
+
+    <button id="legendBtn">☰ Legenda</button>
+    <div style="flex:1"></div>
+    <p style="font-size:11px; color:var(--ink-soft);">Progetto in costruzione. Date e coordinate di questa bozza sono approssimative e da verificare via via che il catalogo si arricchisce.</p>
+  </div>
+
+  <div id="mapCol">
+    <div id="map">
+      <button id="legendToggleBtn" class="map-btn">☰ Legenda</button>
+      <button id="fullscreenBtn" class="map-btn">⛶ Schermo intero</button>
+      <div id="legendPanel" style="display:none;"></div>
+    </div>
+
+    <div id="timeline">
+      <button id="playBtn">▶</button>
+      <button class="nudgeBtn" id="nudgeBack50">«50</button>
+      <button class="nudgeBtn" id="nudgeBack10">«10</button>
+      <input type="range" id="yearSlider" min="-753" max="1453" value="-753" step="1">
+      <button class="nudgeBtn" id="nudgeFwd10">10»</button>
+      <button class="nudgeBtn" id="nudgeFwd50">50»</button>
+      <div id="yearReadout">753 a.C.</div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* =========================================================
+   DATI — prima bozza allargata (~150 voci).
+   Ogni voce:
+     n       nome
+     lat_n   nome latino (mostrato in corsivo nel popup)
+     ys, ye  anno inizio/fine (negativo = a.C.); per eventi puntuali ys = ye
+     luogo, lat, lon
+     era     regno | repubblica | principato | crisi | occidente | oriente  -> COLORE
+     kind    (opzionale) 'battle' | 'siege_imposed' | 'siege_suffered' | 'revolt'
+             se assente = evento generico "landmark" (fondazioni, editti, trattati...)
+     out     (solo per kind:'battle') 'won' | 'lost' | 'uncertain'
+     esito   breve descrizione
+   ========================================================= */
+const EVENTS = [
+// ---------------- REGNO (753–509 a.C.) ----------------
+{n:"Fondazione di Roma", lat_n:"Roma", ys:-753, ye:-753, luogo:"Roma", lat:41.8931, lon:12.4828, era:"regno",
+ esito:"Data tradizionale della fondazione sul Palatino, secondo la leggenda di Romolo e Remo."},
+{n:"Ratto delle Sabine", lat_n:"Roma", ys:-750, ye:-750, luogo:"Roma", lat:41.8931, lon:12.4828, era:"regno",
+ esito:"Episodio fondativo che porta alla fusione fra Romani e Sabini."},
+{n:"Distruzione di Alba Longa", lat_n:"Alba Longa", ys:-673, ye:-673, luogo:"Alba Longa (Colli Albani)", lat:41.75, lon:12.65, era:"regno", kind:"battle", out:"won",
+ esito:"Tullo Ostilio distrugge la città madre di Roma dopo il duello degli Orazi e Curiazi."},
+{n:"Guerra contro i Sabini", lat_n:"Cures", ys:-650, ye:-650, luogo:"Cures, Sabina", lat:42.23, lon:12.62, era:"regno", kind:"battle", out:"won",
+ esito:"Consolidamento del controllo romano sul territorio sabino."},
+{n:"Costruzione delle Mura Serviane", lat_n:"Roma", ys:-575, ye:-570, luogo:"Roma", lat:41.8931, lon:12.4828, era:"regno",
+ esito:"Servio Tullio fortifica la città con una nuova cinta muraria."},
+{n:"Riforma centuriata di Servio Tullio", lat_n:"Roma", ys:-550, ye:-550, luogo:"Roma", lat:41.8931, lon:12.4828, era:"regno",
+ esito:"Riorganizzazione dell'esercito e della cittadinanza per censo."},
+
+// ---------------- REPUBBLICA (509–27 a.C.) ----------------
+{n:"Cacciata dei Tarquini — nascita della Repubblica", lat_n:"Roma", ys:-509, ye:-509, luogo:"Roma", lat:41.8931, lon:12.4828, era:"repubblica",
+ esito:"Fine della monarchia, nascita del governo repubblicano con due consoli annuali."},
+{n:"Battaglia del lago Regillo", lat_n:"Lacus Regillus", ys:-496, ye:-496, luogo:"Lago Regillo", lat:41.8, lon:12.75, era:"repubblica", kind:"battle", out:"won",
+ esito:"Vittoria su Tarquinio il Superbo e la Lega Latina; consolida la giovane Repubblica."},
+{n:"Prima secessione della plebe", lat_n:"Mons Sacer", ys:-494, ye:-494, luogo:"Monte Sacro, Roma", lat:41.94, lon:12.53, era:"repubblica", kind:"revolt",
+ esito:"La plebe si ritira in massa dalla città: nascono i tribuni della plebe."},
+{n:"Leggi delle XII Tavole", lat_n:"Roma", ys:-451, ye:-450, luogo:"Roma", lat:41.8931, lon:12.4828, era:"repubblica",
+ esito:"Prima codificazione scritta del diritto romano."},
+{n:"Assedio di Veio", lat_n:"Veii", ys:-406, ye:-396, luogo:"Veio", lat:42.03, lon:12.4, era:"repubblica", kind:"siege_imposed", out:"won",
+ esito:"Assedio decennale concluso con la distruzione della rivale etrusca Veio."},
+{n:"Sacco di Roma dei Galli di Brenno", lat_n:"Roma", ys:-390, ye:-390, luogo:"Roma", lat:41.8931, lon:12.4828, era:"repubblica", kind:"siege_suffered", out:"lost",
+ esito:"I Galli Senoni saccheggiano Roma; solo il Campidoglio resiste."},
+{n:"Disfatta delle Forche Caudine", lat_n:"Furculae Caudinae", ys:-321, ye:-321, luogo:"Forche Caudine", lat:41.06, lon:14.5, era:"repubblica", kind:"battle", out:"lost",
+ esito:"Seconda guerra sannitica: l'esercito romano è costretto a passare sotto il giogo."},
+{n:"Presa di Capua", lat_n:"Capua", ys:-343, ye:-343, luogo:"Capua", lat:41.1047, lon:14.2139, era:"repubblica",
+ esito:"Prima guerra sannitica: Capua si dà a Roma."},
+{n:"Battaglia di Sentino", lat_n:"Sentinum", ys:-295, ye:-295, luogo:"Sentino (Sassoferrato)", lat:43.43, lon:12.85, era:"repubblica", kind:"battle", out:"won",
+ esito:"Vittoria decisiva sulla coalizione di Sanniti, Galli, Etruschi e Umbri.", },
+{n:"Battaglia di Heraclea", lat_n:"Heraclea", ys:-280, ye:-280, luogo:"Heraclea, Lucania", lat:40.2, lon:16.68, era:"repubblica", kind:"battle", out:"lost",
+ esito:"Prima vittoria di Pirro sui Romani, con perdite altissime per il vincitore."},
+{n:"Battaglia di Ascoli Satriano", lat_n:"Asculum", ys:-279, ye:-279, luogo:"Ascoli Satriano", lat:41.2, lon:15.57, era:"repubblica", kind:"battle", out:"uncertain",
+ esito:"Seconda 'vittoria di Pirro': il re epirota vince ma con perdite insostenibili."},
+{n:"Battaglia di Benevento", lat_n:"Beneventum", ys:-275, ye:-275, luogo:"Benevento", lat:41.13, lon:14.78, era:"repubblica", kind:"battle", out:"won",
+ esito:"Sconfitta definitiva di Pirro, che lascia l'Italia."},
+{n:"Assedio di Agrigento", lat_n:"Agrigentum", ys:-262, ye:-261, luogo:"Agrigento", lat:37.31, lon:13.58, era:"repubblica", kind:"siege_imposed", out:"won",
+ esito:"Prima guerra punica: prima grande vittoria terrestre romana in Sicilia."},
+{n:"Battaglia di Milazzo", lat_n:"Mylae", ys:-260, ye:-260, luogo:"Milazzo, Sicilia", lat:38.2333, lon:15.2333, era:"repubblica", kind:"battle", out:"won",
+ esito:"Prima vittoria navale romana, grazie al corvo d'abbordaggio."},
+{n:"Battaglia di Capo Ecnomo", lat_n:"Ecnomus", ys:-256, ye:-256, luogo:"Capo Ecnomo, Sicilia", lat:37.1, lon:13.93, era:"repubblica", kind:"battle", out:"won",
+ esito:"Una delle più grandi battaglie navali dell'antichità per numero di uomini imbarcati."},
+{n:"Battaglia delle Egadi", lat_n:"Insulae Aegates", ys:-241, ye:-241, luogo:"Isole Egadi", lat:37.9, lon:12.25, era:"repubblica", kind:"battle", out:"won",
+ esito:"Vittoria navale che chiude la prima guerra punica."},
+{n:"Battaglia di Talamone", lat_n:"Telamon", ys:-225, ye:-225, luogo:"Talamone", lat:42.56, lon:11.13, era:"repubblica", kind:"battle", out:"won",
+ esito:"Sconfitta di una grande invasione gallica: apre la conquista della Gallia Cisalpina."},
+{n:"Battaglia del Ticino", lat_n:"Ticinus", ys:-218, ye:-218, luogo:"Fiume Ticino", lat:45.18, lon:9.16, era:"repubblica", kind:"battle", out:"lost",
+ esito:"Seconda guerra punica: primo scontro con Annibale in Italia."},
+{n:"Battaglia della Trebbia", lat_n:"Trebia", ys:-218, ye:-218, luogo:"Fiume Trebbia", lat:45.02, lon:9.7, era:"repubblica", kind:"battle", out:"lost",
+ esito:"Prima grande sconfitta campale contro Annibale."},
+{n:"Battaglia del Trasimeno", lat_n:"Lacus Trasimenus", ys:-217, ye:-217, luogo:"Lago Trasimeno", lat:43.13, lon:12.1, era:"repubblica", kind:"battle", out:"lost",
+ esito:"Annibale annienta l'esercito consolare in un'imboscata sulle rive del lago."},
+{n:"Battaglia di Canne", lat_n:"Cannae", ys:-216, ye:-216, luogo:"Canne, Puglia", lat:41.3, lon:16.1333, era:"repubblica", kind:"battle", out:"lost",
+ esito:"Gravissima sconfitta romana: accerchiamento tattico da manuale."},
+{n:"Assedio di Siracusa", lat_n:"Syracusae", ys:-214, ye:-212, luogo:"Siracusa", lat:37.075, lon:15.29, era:"repubblica", kind:"siege_imposed", out:"won",
+ esito:"Caduta di Siracusa nonostante le macchine di Archimede; il matematico muore nel sacco."},
+{n:"Assedio di Capua ribelle", lat_n:"Capua", ys:-212, ye:-211, luogo:"Capua", lat:41.1047, lon:14.2139, era:"repubblica", kind:"siege_imposed", out:"won",
+ esito:"Punizione della città che si era consegnata ad Annibale dopo Canne."},
+{n:"Battaglia del Metauro", lat_n:"Metaurus", ys:-207, ye:-207, luogo:"Fiume Metauro", lat:43.85, lon:12.9, era:"repubblica", kind:"battle", out:"won",
+ esito:"Sconfitta e morte di Asdrubale: svolta decisiva della guerra."},
+{n:"Battaglia di Zama", lat_n:"Zama Regia", ys:-202, ye:-202, luogo:"Zama, Africa", lat:36.25, lon:9.3, era:"repubblica", kind:"battle", out:"won",
+ esito:"Scipione l'Africano sconfigge Annibale: fine della seconda guerra punica."},
+{n:"Battaglia di Cinocefale", lat_n:"Cynoscephalae", ys:-197, ye:-197, luogo:"Cinocefale, Tessaglia", lat:39.4, lon:22.6, era:"repubblica", kind:"battle", out:"won",
+ esito:"Sconfitta della Macedonia di Filippo V: la legione supera la falange."},
+{n:"Battaglia di Magnesia", lat_n:"Magnesia ad Sipylum", ys:-190, ye:-190, luogo:"Magnesia, Asia Minore", lat:38.6, lon:27.43, era:"repubblica", kind:"battle", out:"won",
+ esito:"Sconfitta di Antioco III di Siria: Roma si affaccia sull'Asia."},
+{n:"Battaglia di Pidna", lat_n:"Pydna", ys:-168, ye:-168, luogo:"Pidna, Macedonia", lat:40.3, lon:22.6, era:"repubblica", kind:"battle", out:"won",
+ esito:"Fine del regno di Macedonia; la regione diventa provincia romana."},
+{n:"Distruzione di Cartagine", lat_n:"Carthago", ys:-149, ye:-146, luogo:"Cartagine", lat:36.85, lon:10.32, era:"repubblica", kind:"siege_imposed", out:"won",
+ esito:"Terza guerra punica: Cartagine è rasa al suolo."},
+{n:"Distruzione di Corinto", lat_n:"Corinthus", ys:-146, ye:-146, luogo:"Corinto", lat:37.94, lon:22.93, era:"repubblica", kind:"siege_imposed", out:"won",
+ esito:"Nello stesso anno di Cartagine, Roma distrugge Corinto e sottomette la Grecia."},
+{n:"Caduta di Numanzia", lat_n:"Numantia", ys:-134, ye:-133, luogo:"Numanzia, Spagna", lat:41.8, lon:-2.43, era:"repubblica", kind:"siege_imposed", out:"won",
+ esito:"Scipione Emiliano piega l'ultima resistenza celtiberica dopo un lungo assedio."},
+{n:"Rivolta e morte di Tiberio Gracco", lat_n:"Roma", ys:-133, ye:-133, luogo:"Roma", lat:41.8931, lon:12.4828, era:"repubblica", kind:"revolt", out:"lost",
+ esito:"Il tribuno riformatore è ucciso in uno scontro di piazza: prima violenza politica interna."},
+{n:"Rivolta e morte di Gaio Gracco", lat_n:"Roma", ys:-121, ye:-121, luogo:"Roma", lat:41.8931, lon:12.4828, era:"repubblica", kind:"revolt", out:"lost",
+ esito:"Il fratello minore, proseguendo le riforme, muore negli scontri con il Senato."},
+{n:"Guerra giugurtina — Battaglia sul Muluccha", lat_n:"Mulucha", ys:-105, ye:-105, luogo:"Fiume Muluccha", lat:35.1, lon:-2.3, era:"repubblica", kind:"battle", out:"won",
+ esito:"Cattura di Giugurta grazie a Mario e al questore Silla."},
+{n:"Guerra sociale — rivolta degli Italici", lat_n:"Corfinium", ys:-91, ye:-88, luogo:"Corfinio", lat:42.1, lon:13.83, era:"repubblica", kind:"revolt", out:"uncertain",
+ esito:"Gli alleati italici insorgono per la cittadinanza romana, ottenuta infine per legge."},
+{n:"Marcia su Roma di Silla", lat_n:"Roma", ys:-88, ye:-88, luogo:"Roma", lat:41.8931, lon:12.4828, era:"repubblica", kind:"revolt", out:"won",
+ esito:"Per la prima volta un generale romano marcia con l'esercito sulla capitale."},
+{n:"Rivolta di Spartaco", lat_n:"Capua", ys:-73, ye:-71, luogo:"Capua e Italia meridionale", lat:41.1047, lon:14.2139, era:"repubblica", kind:"revolt", out:"lost",
+ esito:"La terza guerra servile è schiacciata da Crasso; seimila ribelli crocifissi sulla via Appia."},
+{n:"Congiura di Catilina", lat_n:"Roma", ys:-63, ye:-62, luogo:"Roma", lat:41.8931, lon:12.4828, era:"repubblica", kind:"revolt", out:"lost",
+ esito:"Cicerone sventa la cospirazione; Catilina muore in battaglia a Pistoia."},
+{n:"Primo triumvirato", lat_n:"Roma", ys:-60, ye:-60, luogo:"Roma", lat:41.8931, lon:12.4828, era:"repubblica",
+ esito:"Accordo informale fra Cesare, Pompeo e Crasso per dominare la politica romana."},
+{n:"Battaglia di Carre", lat_n:"Carrhae", ys:-53, ye:-53, luogo:"Carre, Mesopotamia", lat:36.86, lon:39.03, era:"repubblica", kind:"battle", out:"lost",
+ esito:"I Parti annientano l'esercito di Crasso, che muore in battaglia."},
+{n:"Assedio di Alesia", lat_n:"Alesia", ys:-52, ye:-52, luogo:"Alesia, Gallia", lat:47.5333, lon:4.5, era:"repubblica", kind:"siege_imposed", out:"won",
+ esito:"Cesare sconfigge Vercingetorige: la Gallia è sostanzialmente conquistata."},
+{n:"Cesare attraversa il Rubicone", lat_n:"Rubico", ys:-49, ye:-49, luogo:"Fiume Rubicone", lat:44.09, lon:12.36, era:"repubblica", kind:"revolt",
+ esito:"'Alea iacta est': Cesare marcia sull'Italia, inizio della guerra civile."},
+{n:"Battaglia di Farsalo", lat_n:"Pharsalus", ys:-48, ye:-48, luogo:"Farsalo, Grecia", lat:39.3, lon:22.38, era:"repubblica", kind:"battle", out:"won",
+ esito:"Cesare sconfigge Pompeo: fine della prima fase della guerra civile."},
+{n:"Assassinio di Cesare", lat_n:"Roma", ys:-44, ye:-44, luogo:"Roma", lat:41.8931, lon:12.4828, era:"repubblica", kind:"revolt",
+ esito:"Cesare è ucciso alle Idi di marzo da un gruppo di senatori congiurati."},
+{n:"Battaglia di Filippi", lat_n:"Philippi", ys:-42, ye:-42, luogo:"Filippi, Macedonia", lat:41.01, lon:24.28, era:"repubblica", kind:"battle", out:"won",
+ esito:"Ottaviano e Antonio sconfiggono Bruto e Cassio, i cesaricidi."},
+{n:"Battaglia di Azio", lat_n:"Actium", ys:-31, ye:-31, luogo:"Azio, Grecia", lat:38.9422, lon:20.7397, era:"repubblica", kind:"battle", out:"won",
+ esito:"Ottaviano sconfigge Marco Antonio e Cleopatra: ultima guerra civile della Repubblica."},
+
+// ---------------- PRINCIPATO / ALTO IMPERO (27 a.C.–284 d.C.) ----------------
+{n:"Augusto proclamato Princeps", lat_n:"Roma", ys:-27, ye:-27, luogo:"Roma", lat:41.8931, lon:12.4828, era:"principato",
+ esito:"Il Senato conferisce a Ottaviano il titolo di Augusto: nasce formalmente il Principato."},
+{n:"Chiusura del Tempio di Giano", lat_n:"Roma", ys:-29, ye:-29, luogo:"Roma", lat:41.8931, lon:12.4828, era:"principato",
+ esito:"Simbolo della pace raggiunta in tutto il mondo romano (Pax Augusta)."},
+{n:"Disfatta di Teutoburgo", lat_n:"Saltus Teutoburgiensis", ys:9, ye:9, luogo:"Selva di Teutoburgo, Germania", lat:52.0, lon:8.45, era:"principato", kind:"battle", out:"lost",
+ esito:"Arminio annienta tre legioni di Varo: fine dell'espansione oltre il Reno."},
+{n:"Bellum Batonianum", lat_n:"Illyricum", ys:6, ye:9, luogo:"Pannonia e Dalmazia", lat:44.97, lon:19.61, era:"principato", kind:"revolt", out:"uncertain",
+ esito:"Grande rivolta illirica, sedata a fatica da Tiberio dopo tre anni di guerra."},
+{n:"Grande incendio di Roma", lat_n:"Roma", ys:64, ye:64, luogo:"Roma", lat:41.8931, lon:12.4828, era:"principato",
+ esito:"Sotto Nerone, gran parte della città è distrutta dalle fiamme."},
+{n:"Rivolta di Boudicca", lat_n:"Camulodunum", ys:60, ye:61, luogo:"Britannia (Colchester)", lat:51.89, lon:0.90, era:"principato", kind:"revolt", out:"won",
+ esito:"La regina degli Iceni incendia Londinium prima di essere sconfitta dai Romani."},
+{n:"Assedio e distruzione di Gerusalemme", lat_n:"Hierosolyma", ys:70, ye:70, luogo:"Gerusalemme", lat:31.7683, lon:35.2137, era:"principato", kind:"siege_imposed", out:"won",
+ esito:"Tito conquista e distrugge il Tempio: fine della prima guerra giudaica."},
+{n:"Assedio di Masada", lat_n:"Masada", ys:73, ye:73, luogo:"Masada", lat:31.315, lon:35.354, era:"principato", kind:"siege_imposed", out:"won",
+ esito:"Ultima resistenza zelota: gli assediati si tolgono la vita prima della resa."},
+{n:"Eruzione del Vesuvio", lat_n:"Pompeii", ys:79, ye:79, luogo:"Pompei", lat:40.75, lon:14.49, era:"principato",
+ esito:"Pompei ed Ercolano sono sepolte dall'eruzione del Vesuvio."},
+{n:"Vallo di Adriano", lat_n:"Vallum Hadriani", ys:122, ye:128, luogo:"Britannia settentrionale", lat:55.0, lon:-2.33, era:"principato",
+ esito:"Adriano fortifica il confine settentrionale della provincia di Britannia."},
+{n:"Battaglia di Tapae", lat_n:"Tapae", ys:101, ye:101, luogo:"Tapae, Dacia", lat:45.3, lon:22.6, era:"principato", kind:"battle", out:"won",
+ esito:"Traiano apre la prima guerra dacica con una vittoria decisiva."},
+{n:"Caduta di Sarmizegetusa", lat_n:"Sarmizegetusa Regia", ys:105, ye:106, luogo:"Sarmizegetusa, Dacia", lat:45.62, lon:23.31, era:"principato", kind:"siege_imposed", out:"won",
+ esito:"Fine del regno dace di Decebalo: la Dacia diventa provincia romana."},
+{n:"Massima espansione dell'Impero", lat_n:"Ctesiphon", ys:117, ye:117, luogo:"Ctesifonte, Mesopotamia", lat:33.09, lon:44.58, era:"principato",
+ esito:"Sotto Traiano l'impero raggiunge la sua massima estensione territoriale."},
+{n:"Rivolta ebraica della diaspora", lat_n:"Cyrenaica", ys:115, ye:117, luogo:"Cirenaica", lat:32.82, lon:21.86, era:"principato", kind:"revolt", out:"uncertain",
+ esito:"Sollevazioni ebraiche in Egitto, Cirenaica e Cipro, represse duramente."},
+{n:"Rivolta di Bar Kokhba", lat_n:"Betar", ys:132, ye:136, luogo:"Giudea", lat:31.65, lon:35.12, era:"principato", kind:"revolt", out:"lost",
+ esito:"Ultima grande rivolta giudaica: repressa con la dispersione della popolazione."},
+{n:"Peste Antonina", lat_n:"Roma", ys:165, ye:180, luogo:"Roma", lat:41.8931, lon:12.4828, era:"principato",
+ esito:"Epidemia (forse vaiolo) portata dalle legioni d'Oriente, milioni di morti."},
+{n:"Guerre marcomanniche", lat_n:"Carnuntum", ys:166, ye:180, luogo:"Danubio (Carnuntum)", lat:48.11, lon:16.86, era:"principato", kind:"battle", out:"uncertain",
+ esito:"Marco Aurelio combatte per anni contro le tribù germaniche sul confine danubiano."},
+{n:"Anno dei cinque imperatori", lat_n:"Roma", ys:193, ye:193, luogo:"Roma", lat:41.8931, lon:12.4828, era:"principato", kind:"revolt",
+ esito:"Dopo l'assassinio di Commodo, cinque uomini si contendono il trono in un solo anno."},
+{n:"Editto di Caracalla", lat_n:"Roma", ys:212, ye:212, luogo:"Roma", lat:41.8931, lon:12.4828, era:"principato",
+ esito:"Constitutio Antoniniana: cittadinanza romana per quasi tutti gli abitanti liberi dell'impero."},
+{n:"Assassinio di Alessandro Severo", lat_n:"Moguntiacum", ys:235, ye:235, luogo:"Magonza", lat:50.0, lon:8.27, era:"principato", kind:"revolt", out:"lost",
+ esito:"Fine della dinastia dei Severi: inizia l'anarchia militare del III secolo."},
+{n:"Battaglia di Abrittus", lat_n:"Abrittus", ys:251, ye:251, luogo:"Abrittus, Mesia", lat:43.53, lon:26.5, era:"principato", kind:"battle", out:"lost",
+ esito:"L'imperatore Decio muore in battaglia contro i Goti: primo imperatore caduto in guerra."},
+{n:"Cattura dell'imperatore Valeriano", lat_n:"Edessa", ys:260, ye:260, luogo:"Edessa, Mesopotamia", lat:37.16, lon:38.79, era:"principato", kind:"battle", out:"lost",
+ esito:"Sapore I di Persia cattura Valeriano: unico caso di un imperatore romano prigioniero."},
+{n:"Secessione dell'Impero delle Gallie", lat_n:"Colonia Agrippina", ys:260, ye:274, luogo:"Colonia (Germania)", lat:50.94, lon:6.96, era:"principato", kind:"revolt", out:"uncertain",
+ esito:"Gallia, Britannia e Spagna si staccano sotto un proprio imperatore."},
+{n:"Rivolta di Zenobia e regno di Palmira", lat_n:"Palmyra", ys:267, ye:272, luogo:"Palmira, Siria", lat:34.55, lon:38.27, era:"principato", kind:"revolt", out:"lost",
+ esito:"La regina Zenobia sfida Roma in Oriente; è infine sconfitta da Aureliano."},
+{n:"Aureliano riunifica l'Impero", lat_n:"Roma", ys:274, ye:274, luogo:"Roma", lat:41.8931, lon:12.4828, era:"principato",
+ esito:"Aureliano, 'restitutor orbis', riporta sotto un solo governo tutte le province."},
+{n:"Costruzione delle Mura Aureliane", lat_n:"Roma", ys:271, ye:275, luogo:"Roma", lat:41.8931, lon:12.4828, era:"principato",
+ esito:"Nuova, imponente cinta muraria a difesa della capitale, segno dei tempi incerti."},
+
+// ---------------- CRISI DEL III SEC. / TETRARCHIA (235–324) ----------------
+{n:"Diocleziano e la Tetrarchia", lat_n:"Nicomedia", ys:284, ye:284, luogo:"Nicomedia, Bitinia", lat:40.7656, lon:29.9414, era:"crisi",
+ esito:"Diocleziano riforma il governo dell'impero in un sistema a quattro sovrani."},
+{n:"Editto sui prezzi massimi", lat_n:"Roma", ys:301, ye:301, luogo:"Impero romano", lat:41.9, lon:20.0, era:"crisi",
+ esito:"Tentativo, fallito, di calmierare l'inflazione con un tetto ai prezzi."},
+{n:"Grande persecuzione dei cristiani", lat_n:"Nicomedia", ys:303, ye:311, luogo:"Nicomedia", lat:40.7656, lon:29.9414, era:"crisi", kind:"revolt",
+ esito:"Ultima e più dura persecuzione, voluta da Diocleziano e Galerio."},
+{n:"Battaglia di Ponte Milvio", lat_n:"Pons Milvius", ys:312, ye:312, luogo:"Ponte Milvio, Roma", lat:41.94, lon:12.47, era:"crisi", kind:"battle", out:"won",
+ esito:"'In hoc signo vinces': Costantino sconfigge Massenzio e diventa unico Augusto d'Occidente."},
+{n:"Editto di Milano", lat_n:"Mediolanum", ys:313, ye:313, luogo:"Milano", lat:45.4642, lon:9.19, era:"crisi",
+ esito:"Costantino e Licinio proclamano la libertà di culto per i cristiani."},
+{n:"Concilio di Nicea", lat_n:"Nicaea", ys:325, ye:325, luogo:"Nicea, Bitinia", lat:40.43, lon:29.72, era:"crisi",
+ esito:"Primo concilio ecumenico: definisce il credo niceno e l'unità dottrinale."},
+{n:"Fondazione di Costantinopoli", lat_n:"Constantinopolis (già Byzantium)", ys:330, ye:330, luogo:"Costantinopoli", lat:41.0082, lon:28.9784, era:"crisi",
+ esito:"Costantino inaugura la nuova capitale sul Bosforo, sul sito dell'antica Bisanzio."},
+{n:"Battaglia di Argentoratum (Strasburgo)", lat_n:"Argentoratum", ys:357, ye:357, luogo:"Strasburgo", lat:48.58, lon:7.75, era:"crisi", kind:"battle", out:"won",
+ esito:"Giuliano sconfigge una coalizione alemanna, stabilizzando il confine renano."},
+{n:"Battaglia del Frigido", lat_n:"Frigidus", ys:394, ye:394, luogo:"Fiume Frigido, Slovenia", lat:45.85, lon:13.97, era:"crisi", kind:"battle", out:"won",
+ esito:"Teodosio I sconfigge l'usurpatore Eugenio: ultima vittoria di un imperatore su entrambe le metà unite."},
+{n:"Battaglia di Adrianopoli", lat_n:"Hadrianopolis", ys:378, ye:378, luogo:"Adrianopoli, Tracia", lat:41.6771, lon:26.5557, era:"crisi", kind:"battle", out:"lost",
+ esito:"I Goti annientano l'esercito d'Oriente e uccidono l'imperatore Valente."},
+{n:"Editto di Tessalonica", lat_n:"Thessalonica", ys:380, ye:380, luogo:"Tessalonica", lat:40.64, lon:22.94, era:"crisi",
+ esito:"Il cristianesimo niceno diventa religione ufficiale dell'impero."},
+
+// ---------------- IMPERO D'OCCIDENTE (395–476) ----------------
+{n:"Divisione definitiva dell'Impero", lat_n:"Roma / Constantinopolis", ys:395, ye:395, luogo:"Roma e Costantinopoli", lat:41.9, lon:20.0, era:"occidente",
+ esito:"Alla morte di Teodosio I, l'impero è diviso fra i figli Onorio e Arcadio."},
+{n:"Rivolta di Magno Massimo", lat_n:"Augusta Treverorum", ys:383, ye:388, luogo:"Treviri, Gallia", lat:49.76, lon:6.64, era:"occidente", kind:"revolt", out:"uncertain",
+ esito:"Usurpazione in Britannia e Gallia, infine sconfitta da Teodosio I."},
+{n:"Ravenna nuova capitale d'Occidente", lat_n:"Ravenna", ys:402, ye:402, luogo:"Ravenna", lat:44.4184, lon:12.2035, era:"occidente",
+ esito:"La corte imperiale si trasferisce da Milano a Ravenna, protetta dalle paludi."},
+{n:"Battaglia di Pollenzo", lat_n:"Pollentia", ys:402, ye:402, luogo:"Pollenzo, Piemonte", lat:44.62, lon:7.92, era:"occidente", kind:"battle", out:"uncertain",
+ esito:"Stilicone contrasta l'invasione di Alarico in Italia, senza risolvere la minaccia."},
+{n:"Attraversamento del Reno", lat_n:"Moguntiacum", ys:406, ye:406, luogo:"Magonza", lat:50.0, lon:8.27, era:"occidente", kind:"revolt",
+ esito:"Vandali, Alani e Svevi attraversano il Reno gelato: apre le grandi invasioni in Occidente."},
+{n:"Morte di Stilicone", lat_n:"Ravenna", ys:408, ye:408, luogo:"Ravenna", lat:44.4184, lon:12.2035, era:"occidente",
+ esito:"Il generale vandalo, ultimo grande difensore dell'Occidente, è giustiziato per tradimento."},
+{n:"Sacco di Roma dei Visigoti", lat_n:"Roma", ys:410, ye:410, luogo:"Roma", lat:41.8931, lon:12.4828, era:"occidente", kind:"siege_suffered", out:"lost",
+ esito:"Alarico saccheggia Roma: primo sacco della città in ottocento anni."},
+{n:"Rivolta dei Bagaudi", lat_n:"Gallia/Hispania", ys:409, ye:417, luogo:"Gallia e Spagna", lat:46.95, lon:4.3, era:"occidente", kind:"revolt", out:"uncertain",
+ esito:"Sollevazioni contadine contro il fisco imperiale in un impero sempre più debole."},
+{n:"Battaglia dei Campi Catalaunici", lat_n:"Campus Mauriacus", ys:451, ye:451, luogo:"Chalons-en-Champagne", lat:48.96, lon:4.36, era:"occidente", kind:"battle", out:"won",
+ esito:"Ezio e i suoi alleati fermano l'avanzata di Attila in Gallia."},
+{n:"Sacco di Roma dei Vandali", lat_n:"Roma", ys:455, ye:455, luogo:"Roma", lat:41.8931, lon:12.4828, era:"occidente", kind:"siege_suffered", out:"lost",
+ esito:"Genserico saccheggia Roma per due settimane, più sistematicamente di Alarico."},
+{n:"Deposizione di Romolo Augustolo", lat_n:"Ravenna", ys:476, ye:476, luogo:"Ravenna", lat:44.4184, lon:12.2035, era:"occidente",
+ esito:"Odoacre depone l'ultimo imperatore d'Occidente: data convenzionale della caduta."},
+{n:"Regno di Odoacre in Italia", lat_n:"Ravenna", ys:476, ye:493, luogo:"Ravenna", lat:44.4184, lon:12.2035, era:"occidente",
+ esito:"Odoacre governa l'Italia come re, formalmente in nome dell'imperatore d'Oriente."},
+
+// ---------------- IMPERO D'ORIENTE / BISANZIO (395–1453) ----------------
+{n:"Corpus Iuris Civilis", lat_n:"Constantinopolis", ys:529, ye:534, luogo:"Costantinopoli", lat:41.0082, lon:28.9784, era:"oriente",
+ esito:"Giustiniano promulga la grande codificazione del diritto romano."},
+{n:"Rivolta di Nika", lat_n:"Constantinopolis", ys:532, ye:532, luogo:"Costantinopoli", lat:41.0082, lon:28.9784, era:"oriente", kind:"revolt", out:"lost",
+ esito:"Sommossa nell'Ippodromo repressa nel sangue da Belisario: circa trentamila morti."},
+{n:"Riconquista di Cartagine", lat_n:"Carthago", ys:533, ye:533, luogo:"Cartagine", lat:36.85, lon:10.32, era:"oriente", kind:"siege_imposed", out:"won",
+ esito:"Belisario abbatte il regno vandalo e riporta l'Africa sotto Roma."},
+{n:"Riconquista di Roma", lat_n:"Roma", ys:536, ye:536, luogo:"Roma", lat:41.8931, lon:12.4828, era:"oriente", kind:"siege_imposed", out:"won",
+ esito:"Belisario entra a Roma, sottratta agli Ostrogoti, nella guerra gotica."},
+{n:"Assedio ostrogoto di Roma", lat_n:"Roma", ys:537, ye:538, luogo:"Roma", lat:41.8931, lon:12.4828, era:"oriente", kind:"siege_suffered", out:"won",
+ esito:"Vitige assedia Roma per un anno; Belisario resiste e respinge i Goti."},
+{n:"Costruzione di Santa Sofia", lat_n:"Hagia Sophia, Constantinopolis", ys:532, ye:537, luogo:"Costantinopoli", lat:41.0086, lon:28.9802, era:"oriente",
+ esito:"Giustiniano erige la grande basilica, capolavoro dell'architettura bizantina."},
+{n:"Peste di Giustiniano", lat_n:"Constantinopolis", ys:541, ye:549, luogo:"Costantinopoli", lat:41.0082, lon:28.9784, era:"oriente",
+ esito:"Prima pandemia di peste documentata: devasta l'impero e ne indebolisce la ripresa."},
+{n:"Battaglia dello Yarmuk", lat_n:"Hieromyces", ys:636, ye:636, luogo:"Fiume Yarmuk", lat:32.75, lon:35.95, era:"oriente", kind:"battle", out:"lost",
+ esito:"Gli Arabi sconfiggono l'esercito bizantino: perdita della Siria."},
+{n:"Caduta di Alessandria", lat_n:"Alexandria", ys:641, ye:642, luogo:"Alessandria d'Egitto", lat:31.2, lon:29.92, era:"oriente", kind:"siege_suffered", out:"lost",
+ esito:"Gli Arabi occupano l'Egitto, granaio dell'impero d'Oriente."},
+{n:"Primo assedio arabo di Costantinopoli", lat_n:"Constantinopolis", ys:674, ye:678, luogo:"Costantinopoli", lat:41.0082, lon:28.9784, era:"oriente", kind:"siege_suffered", out:"won",
+ esito:"La città resiste grazie anche al fuoco greco, appena inventato."},
+{n:"Secondo assedio arabo di Costantinopoli", lat_n:"Constantinopolis", ys:717, ye:718, luogo:"Costantinopoli", lat:41.0082, lon:28.9784, era:"oriente", kind:"siege_suffered", out:"won",
+ esito:"Leone III Isaurico respinge l'assedio omayyade, salvando l'Europa cristiana."},
+{n:"Editto iconoclasta di Leone III", lat_n:"Constantinopolis", ys:726, ye:726, luogo:"Costantinopoli", lat:41.0082, lon:28.9784, era:"oriente",
+ esito:"Inizia la controversia iconoclasta che dividerà l'impero per oltre un secolo."},
+{n:"Battaglia di Manzikert", lat_n:"Manzikert", ys:1071, ye:1071, luogo:"Manzikert, Anatolia", lat:39.14, lon:42.53, era:"oriente", kind:"battle", out:"lost",
+ esito:"I Turchi selgiuchidi sconfiggono l'esercito bizantino: apre la perdita dell'Anatolia."},
+{n:"Sacco di Costantinopoli (Quarta Crociata)", lat_n:"Constantinopolis", ys:1204, ye:1204, luogo:"Costantinopoli", lat:41.0082, lon:28.9784, era:"oriente", kind:"siege_suffered", out:"lost",
+ esito:"I crociati latini saccheggiano la capitale bizantina, fondandovi un impero latino."},
+{n:"Riconquista di Costantinopoli", lat_n:"Constantinopolis", ys:1261, ye:1261, luogo:"Costantinopoli", lat:41.0082, lon:28.9784, era:"oriente",
+ esito:"Michele VIII Paleologo restaura l'impero bizantino, ormai molto indebolito."},
+{n:"Caduta di Costantinopoli", lat_n:"Constantinopolis", ys:1453, ye:1453, luogo:"Costantinopoli", lat:41.0082, lon:28.9784, era:"oriente", kind:"siege_suffered", out:"lost",
+ esito:"Maometto II conquista Costantinopoli: fine dell'Impero Romano d'Oriente."}
+];
+
+// VIE IMPERIALI
+const ROADS = [
+  {n:"Via Appia", lat_n:"Via Appia", built:-312, pts:[[41.8931,12.4828],[41.4,14.2],[40.85,17.15],[40.65,17.95]]},
+  {n:"Via Flaminia", lat_n:"Via Flaminia", built:-220, pts:[[41.8931,12.4828],[42.9,12.9],[43.85,12.6],[44.05,12.57]]},
+  {n:"Via Egnatia", lat_n:"Via Egnatia", built:-146, pts:[[41.3275,19.4547],[40.65,21.1],[40.64,22.94],[41.0082,28.9784]]},
+  {n:"Via Domitia", lat_n:"Via Domitia", built:-118, pts:[[43.7,7.27],[43.6,4.63],[43.4,3.0],[42.7,2.9]]},
+  {n:"Via Traiana", lat_n:"Via Traiana", built:109, pts:[[40.85,17.15],[40.95,16.6],[41.13,16.87],[41.6,15.55]]}
+];
+</script>
+
+<script>
+/* ===================== MAPPA E LOGICA ===================== */
+const map = L.map('map', {zoomControl:true}).setView([41.5, 15], 4);
+L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+  attribution:'&copy; OpenStreetMap contributors &copy; CARTO', subdomains:'abcd', maxZoom:19
+}).addTo(map);
+
+const markerLayer = L.layerGroup().addTo(map);
+const roadLayer = L.layerGroup();
+
+function getCss(v){ return getComputedStyle(document.documentElement).getPropertyValue(v).trim(); }
+const ERA_COLOR = {
+  regno: getCss('--regno'), repubblica: getCss('--repubblica'), principato: getCss('--principato'),
+  crisi: getCss('--crisi'), occidente: getCss('--occidente'), oriente: getCss('--oriente')
+};
+const ERA_LABEL = {
+  regno:"Regno di Roma", repubblica:"Repubblica", principato:"Principato / Alto Impero",
+  crisi:"Crisi del III secolo / Tetrarchia", occidente:"Impero d'Occidente", oriente:"Impero d'Oriente / Bisanzio"
+};
+const RING = {
+  won: getCss('--won'), lost: getCss('--lost'), uncertain: getCss('--uncertain'),
+  siege_imposed: getCss('--siege-imp'), siege_suffered: getCss('--siege-suf'), revolt: getCss('--revolt')
+};
+const KIND_LABEL = {
+  battle_won:"Battaglia — vittoria romana", battle_lost:"Battaglia — sconfitta romana", battle_uncertain:"Battaglia — esito incerto",
+  siege_imposed:"Assedio imposto da Roma", siege_suffered:"Assedio subito da Roma", revolt:"Rivolta / guerra civile"
+};
+
+function yearLabel(y){ return y<0 ? (-y)+" a.C." : y+" d.C."; }
+
+// Determina l'id del checkbox filtro che governa la visibilità dell'evento
+// (null = evento generico, filtrato solo per epoca, non per tipo)
+function filterToggleId(ev){
+  if(ev.kind === 'battle'){
+    return {won:'wonToggle', lost:'lostToggle', uncertain:'uncertainToggle'}[ev.out] || null;
+  }
+  if(ev.kind === 'siege_imposed') return 'siegeImposedToggle';
+  if(ev.kind === 'siege_suffered') return 'siegeSufferedToggle';
+  if(ev.kind === 'revolt') return 'revoltToggle';
+  return null;
+}
+
+function ringColor(ev){
+  if(ev.kind === 'battle') return RING[ev.out] || '#888';
+  if(ev.kind) return RING[ev.kind];
+  return null;
+}
+
+function eventVisible(ev){
+  const eraOn = document.querySelector('.erabox[value="'+ev.era+'"]').checked;
+  if(!eraOn) return false;
+  const toggleId = filterToggleId(ev);
+  if(toggleId && !document.getElementById(toggleId).checked) return false;
+  const allTime = document.getElementById('allTimeToggle').checked;
+  if(allTime) return true;
+  const year = parseInt(document.getElementById('yearSlider').value,10);
+  return year >= ev.ys;
+}
+
+// true se l'evento ha una durata (assedio/rivolta pluriennale) ed è "in corso"
+// nell'anno correntemente selezionato — usato solo per lo stile grafico.
+function isActiveDuration(ev, year){
+  if(ev.ye <= ev.ys) return false;
+  return year >= ev.ys && year <= ev.ye;
+}
+
+function render(){
+  markerLayer.clearLayers();
+  let count = 0;
+  const allTime = document.getElementById('allTimeToggle').checked;
+  const year = parseInt(document.getElementById('yearSlider').value,10);
+
+  EVENTS.forEach(ev=>{
+    if(!eventVisible(ev)) return;
+    count++;
+    const eraColor = ERA_COLOR[ev.era] || '#888';
+    const ring = ringColor(ev);
+    const active = !allTime && isActiveDuration(ev, year);
+
+    const opts = {
+      radius: ev.kind ? (active ? 10 : 8) : 6,
+      color: ring || eraColor,
+      weight: ring ? (active ? 4 : 2.5) : 1.5,
+      dashArray: (ev.kind === 'siege_suffered') ? '3 3' : (ev.kind === 'revolt' ? '1 4' : null),
+      fillColor: eraColor,
+      fillOpacity: active ? 0.95 : 0.8
+    };
+    const marker = L.circleMarker([ev.lat, ev.lon], opts);
+
+    const rangeLabel = ev.ye > ev.ys ? (yearLabel(ev.ys)+' – '+yearLabel(ev.ye)) : yearLabel(ev.ys);
+    let kindTag = '';
+    if(ev.kind === 'battle') kindTag = KIND_LABEL['battle_'+ev.out] || '';
+    else if(ev.kind) kindTag = KIND_LABEL[ev.kind] || '';
+
+    marker.bindPopup(
+      '<b>'+ev.n+'</b><br>'+
+      '<span class="lat-name">'+ev.lat_n+'</span><br>'+
+      '<i>'+rangeLabel+(active?' — in corso':'')+'</i> — '+ev.luogo+'<br>'+
+      ev.esito+
+      '<div><span class="popup-era" style="background:'+eraColor+'">'+ERA_LABEL[ev.era]+'</span>'+
+      (kindTag ? '<span class="popup-kind" style="background:'+(ring||'#888')+'">'+kindTag+'</span>' : '')+
+      '</div>'
+    );
+    marker.addTo(markerLayer);
+  });
+
+  document.getElementById('stat-count').textContent = count;
+}
+
+function renderRoads(){
+  roadLayer.clearLayers();
+  ROADS.forEach(r=>{
+    const line = L.polyline(r.pts, { color:'#5a4326', weight:3, dashArray:'2 8', opacity:0.85 });
+    line.bindTooltip('<b>'+r.n+'</b><br><span class="lat-name">'+r.lat_n+'</span><br>costruita: '+yearLabel(r.built));
+    line.addTo(roadLayer);
+  });
+}
+renderRoads();
+roadLayer.addTo(map);
+document.getElementById('roadsToggle').addEventListener('change', function(){
+  if(this.checked) roadLayer.addTo(map); else map.removeLayer(roadLayer);
+});
+
+document.querySelectorAll('.erabox').forEach(cb=>cb.addEventListener('change', render));
+document.querySelectorAll('.filterbox').forEach(cb=>cb.addEventListener('change', render));
+
+const slider = document.getElementById('yearSlider');
+const readout = document.getElementById('yearReadout');
+const statYear = document.getElementById('stat-year');
+
+document.getElementById('allTimeToggle').addEventListener('change', function(){
+  slider.disabled = this.checked;
+  render();
+});
+slider.disabled = document.getElementById('allTimeToggle').checked;
+
+slider.addEventListener('input', ()=>{
+  const y = parseInt(slider.value,10);
+  readout.textContent = yearLabel(y);
+  statYear.textContent = yearLabel(y);
+  render();
+});
+
+function nudge(delta){
+  document.getElementById('allTimeToggle').checked = false;
+  slider.disabled = false;
+  slider.value = Math.min(1453, Math.max(-753, parseInt(slider.value,10)+delta));
+  slider.dispatchEvent(new Event('input'));
+}
+document.getElementById('nudgeBack50').addEventListener('click', ()=>nudge(-50));
+document.getElementById('nudgeBack10').addEventListener('click', ()=>nudge(-10));
+document.getElementById('nudgeFwd10').addEventListener('click', ()=>nudge(10));
+document.getElementById('nudgeFwd50').addEventListener('click', ()=>nudge(50));
+
+let playing = false, playTimer = null;
+document.getElementById('playBtn').addEventListener('click', function(){
+  playing = !playing;
+  this.textContent = playing ? '⏸' : '▶';
+  if(playing){
+    document.getElementById('allTimeToggle').checked = false;
+    slider.disabled = false;
+    playTimer = setInterval(()=>{
+      let y = parseInt(slider.value,10) + 6;
+      if(y > 1453){ y = -753; }
+      slider.value = y;
+      slider.dispatchEvent(new Event('input'));
+    }, 180);
+  } else {
+    clearInterval(playTimer);
+  }
+});
+
+function buildLegend(){
+  let html = '<h3>Epoche</h3>';
+  Object.keys(ERA_LABEL).forEach(k=>{
+    html += '<div class="row"><span class="swatch" style="background:'+ERA_COLOR[k]+'"></span>'+ERA_LABEL[k]+'</div>';
+  });
+  html += '<h3>Battaglie</h3>';
+  html += '<div class="row"><span class="swatch round" style="background:'+RING.won+'"></span>Vittoria romana</div>';
+  html += '<div class="row"><span class="swatch round" style="background:'+RING.lost+'"></span>Sconfitta romana</div>';
+  html += '<div class="row"><span class="swatch round" style="background:'+RING.uncertain+'"></span>Esito incerto</div>';
+  html += '<h3>Assedi e rivolte</h3>';
+  html += '<div class="row"><span class="swatch round" style="background:'+RING.siege_imposed+'"></span>Assedio imposto da Roma</div>';
+  html += '<div class="row"><span class="swatch round" style="background:'+RING.siege_suffered+'; border:1.5px dashed #4a1010;"></span>Assedio subito da Roma</div>';
+  html += '<div class="row"><span class="swatch round" style="background:'+RING.revolt+'"></span>Rivolta / guerra civile</div>';
+  html += '<p style="font-size:11px;color:var(--ink-soft);margin-top:8px;">Il cerchio più grande e pieno indica un assedio/rivolta "in corso" nell\'anno selezionato.</p>';
+  html += '<h3>Vie imperiali</h3>';
+  html += '<div class="row"><span class="swatch" style="background:repeating-linear-gradient(90deg,#5a4326 0 5px,transparent 5px 9px);"></span>Strada romana</div>';
+  document.getElementById('legendPanel').innerHTML = html;
+}
+buildLegend();
+function toggleLegend(){
+  const p = document.getElementById('legendPanel');
+  p.style.display = p.style.display === 'none' ? 'block' : 'none';
+}
+document.getElementById('legendBtn').addEventListener('click', toggleLegend);
+document.getElementById('legendToggleBtn').addEventListener('click', toggleLegend);
+
+document.getElementById('fullscreenBtn').addEventListener('click', ()=>{
+  const el = document.getElementById('app');
+  if(!document.fullscreenElement){ el.requestFullscreen && el.requestFullscreen(); }
+  else{ document.exitFullscreen && document.exitFullscreen(); }
+});
+document.addEventListener('fullscreenchange', ()=> setTimeout(()=>map.invalidateSize(), 150));
+
+window.addEventListener('resize', ()=>map.invalidateSize());
+window.addEventListener('load', ()=>{ setTimeout(()=>map.invalidateSize(), 150); setTimeout(()=>map.invalidateSize(), 600); });
+
+render();
+</script>
+</body>
+</html>
