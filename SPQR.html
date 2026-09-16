@@ -5018,7 +5018,17 @@ const EVENTS = [
   "lon": 36.1603,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Antiochia, capitale ellenistica dei Seleucidi, passa sotto il controllo romano nel 64 a.C. quando Pompeo annette la Siria (nome latino Antiochia)."
+  "esito": "Antiochia, capitale ellenistica dei Seleucidi, passa sotto il controllo romano nel 64 a.C. quando Pompeo annette la Siria (nome latino Antiochia). Riconquistata dai Bizantini sotto Niceforo Foca nel 969 (dopo tre secoli di dominio arabo), Antiochia resta romano-orientale fino alla conquista selgiuchide del 1084, poco prima della prima crociata.",
+  "periods": [
+   [
+    -64,
+    636
+   ],
+   [
+    969,
+    1084
+   ]
+  ]
  },
  {
   "n": "Conquista di Ascoli Piceno",
@@ -25910,6 +25920,132 @@ const EVENTS = [
   "era": "principato",
   "kind": "city",
   "esito": "Città della provincia romana di Galatia et Cappadocia. Zela (modern Zile, Turkey) was an important ancient city of north-central Asia Minor; Strabo claimed Semiramis had founded the site. Iulius Caesar prevailed in the Battle of Zela against Pharnaces II of The Kingdom of Pontus."
+ },
+ {
+  "n": "Ctesifonte (occupazioni romane)",
+  "lat_n": "Ctesiphon",
+  "ys": 116,
+  "ye": 117,
+  "luogo": "Presso Baghdad, Iraq",
+  "lat": 33.0938,
+  "lon": 44.5797,
+  "era": "principato",
+  "kind": "city",
+  "periods": [
+   [
+    116,
+    117
+   ],
+   [
+    165,
+    166
+   ],
+   [
+    198,
+    199
+   ],
+   [
+    283,
+    283
+   ],
+   [
+    363,
+    363
+   ]
+  ],
+  "esito": "Capitale partica poi sasanide, occupata brevemente da Roma cinque volte senza mai essere annessa stabilmente: da Traiano (116-117), Avidio Cassio sotto Lucio Vero (165), Settimio Severo (198), Caro (283) e Giuliano (363, che la assediò senza espugnarla prima di ritirarsi verso la propria morte). Ogni volta i Romani si ritirarono per problemi logistici o dinastici, lasciando la città ai Parti/Sasanidi."
+ },
+ {
+  "n": "Seleucia sul Tigri (occupazioni romane)",
+  "lat_n": "Seleucia",
+  "ys": 116,
+  "ye": 117,
+  "luogo": "Presso Baghdad, Iraq",
+  "lat": 33.096,
+  "lon": 44.5333,
+  "era": "principato",
+  "kind": "city",
+  "periods": [
+   [
+    116,
+    117
+   ],
+   [
+    165,
+    166
+   ],
+   [
+    198,
+    199
+   ]
+  ],
+  "esito": "Grande metropoli ellenistica gemella di Ctesifonte, sull'altra sponda del Tigri: subì la stessa sequenza di occupazioni romane temporanee, venendo incendiata da Avidio Cassio nel 165 d.C. durante il saccheggio della regione."
+ },
+ {
+  "n": "Atene",
+  "lat_n": "Athenae",
+  "ys": -146,
+  "ye": 1204,
+  "luogo": "Atene, Grecia",
+  "lat": 37.9838,
+  "lon": 23.7275,
+  "era": "repubblica",
+  "kind": "city",
+  "esito": "Capitale culturale della Grecia romano-bizantina; come gran parte dell'entroterra greco, la sua area subisce l'urto delle invasioni slavo-avare dalla fine del VI secolo. La città vera e propria non fu mai conquistata stabilmente, ma la rete amministrativa bizantina nella regione collassò per decenni; il pieno controllo imperiale torna con la creazione del thema di Hellas nell'VIII secolo.",
+  "periods": [
+   [
+    -146,
+    582
+   ],
+   [
+    800,
+    1204
+   ]
+  ]
+ },
+ {
+  "n": "Corinto",
+  "lat_n": "Corinthus",
+  "ys": -146,
+  "ye": 1204,
+  "luogo": "Corinto, Grecia",
+  "lat": 37.9061,
+  "lon": 22.8781,
+  "era": "repubblica",
+  "kind": "city",
+  "esito": "Snodo commerciale chiave tra Adriatico ed Egeo; come Atene, l'entroterra corinzio è investito dalle invasioni slave dalla fine del VI secolo, con un vuoto di controllo amministrativo diretto fino alla riorganizzazione bizantina in themata.",
+  "periods": [
+   [
+    -146,
+    582
+   ],
+   [
+    800,
+    1204
+   ]
+  ]
+ },
+ {
+  "n": "Sparta",
+  "lat_n": "Lacedaemon",
+  "ys": -146,
+  "ye": 1204,
+  "luogo": "Sparta, Grecia",
+  "lat": 37.0755,
+  "lon": 22.42,
+  "era": "repubblica",
+  "kind": "city",
+  "esito": "L'antica Sparta, ridotta a piccolo centro in epoca romana, è tra le zone più duramente colpite dalle invasioni slave nel Peloponneso: fonti bizantine descrivono lo stesso Peloponneso interno come 'slavizzato' per oltre due secoli, finché Niceforo I non vi restaura il controllo imperiale agli inizi del IX secolo.",
+  "periods": [
+   [
+    -146,
+    582
+   ],
+   [
+    800,
+    1204
+   ]
+  ]
  }
 ];
 
@@ -27194,6 +27330,20 @@ const KIND_LABEL = {
 
 function yearLabel(y){ return y<0 ? (-y)+" a.C." : y+" d.C."; }
 
+// Determina l'epoca "attuale" in base all'anno selezionato sullo slider, non
+// all'epoca di fondazione della localita': cosi' un pallino cambia colore nel
+// tempo (es. una citta' balcanica fondata in epoca repubblicana si tinge
+// d'oro/bizantino quando l'anno selezionato entra nel periodo imperiale
+// d'Oriente), invece di restare fissato per sempre al colore della sua nascita.
+function eraForYear(y){
+  if(y <= -509) return 'regno';
+  if(y <= -27) return 'repubblica';
+  if(y <= 284) return 'principato';
+  if(y <= 395) return 'crisi';
+  if(y <= 476) return 'occidente';
+  return 'oriente';
+}
+
 // Determina l'id del checkbox filtro che governa la visibilità dell'evento
 // (null = evento generico, filtrato solo per epoca, non per tipo)
 function filterToggleId(ev){
@@ -27213,13 +27363,19 @@ function ringColor(ev){
 }
 
 function eventVisible(ev){
-  const eraOn = document.querySelector('.erabox[value="'+ev.era+'"]').checked;
+  const allTime = document.getElementById('allTimeToggle').checked;
+  const year = parseInt(document.getElementById('yearSlider').value,10);
+  // Per le localita' persistenti, la casella "epoca" da controllare e' quella
+  // dell'anno CORRENTE (non quella di fondazione): altrimenti una citta' nata
+  // in eta' repubblicana ma ancora bizantina nel 900 d.C. sparirebbe se la
+  // sola casella "repubblica" fosse deselezionata, pur essendo l'epoca
+  // "oriente" ancora selezionata.
+  const eraToCheck = (ev.kind === 'city' && !allTime) ? eraForYear(year) : ev.era;
+  const eraOn = document.querySelector('.erabox[value="'+eraToCheck+'"]').checked;
   if(!eraOn) return false;
   const toggleId = filterToggleId(ev);
   if(toggleId && !document.getElementById(toggleId).checked) return false;
-  const allTime = document.getElementById('allTimeToggle').checked;
   if(allTime) return true;
-  const year = parseInt(document.getElementById('yearSlider').value,10);
   // Le località (kind:"city") rappresentano un possesso territoriale: appaiono
   // quando fondate/conquistate e SPARISCONO quando la regione esce dal controllo
   // romano/bizantino (campo "ye"). Alcune regioni furono perse e poi
@@ -27249,7 +27405,13 @@ function render(){
   const year = parseInt(document.getElementById('yearSlider').value,10);
 
   function drawMarker(ev){
-    const eraColor = ERA_COLOR[ev.era] || '#888';
+    // Le localita' persistenti (kind:"city") mostrano il colore dell'epoca
+    // CORRENTE (in base all'anno sullo slider), non quello di fondazione:
+    // una citta' nata in eta' repubblicana e ancora attiva in eta' bizantina
+    // appare quindi col colore "oriente" quando l'anno lo giustifica.
+    // Le battaglie/eventi puntuali restano invece colorati con la loro epoca fissa.
+    const displayEra = (ev.kind === 'city' && !allTime) ? eraForYear(year) : ev.era;
+    const eraColor = ERA_COLOR[displayEra] || '#888';
     const active = !allTime && isActiveDuration(ev, year);
 
     const rangeLabel = ev.periods
