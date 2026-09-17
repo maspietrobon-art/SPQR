@@ -948,6 +948,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
       <label class="cat-row"><input type="checkbox" class="filterbox" id="siegeImposedToggle" checked><span class="swatch round" style="background:radial-gradient(circle,#ffe8b0,var(--siege-imp) 75%);border:1.5px solid #6b4e1f;"></span>Assedi imposti da Roma</label>
       <label class="cat-row"><input type="checkbox" class="filterbox" id="siegeSufferedToggle" checked><span class="swatch round" style="background:radial-gradient(circle,#ffe0d8,var(--siege-suf) 75%);border:1.5px dashed #4a1010;"></span>Assedi subiti da Roma</label>
       <label class="cat-row"><input type="checkbox" class="filterbox" id="revoltToggle" checked><span class="swatch round" style="background:radial-gradient(circle,#ecd8fa,var(--revolt) 75%);"></span>Rivolte e guerre civili</label>
+      <label class="cat-row"><input type="checkbox" class="filterbox" id="landmarkToggle" checked><span class="swatch round" style="background:radial-gradient(circle,#fff,#bbb 75%);border:1.5px solid #666;"></span>Editti, fondazioni, trattati (✦)</label>
     </fieldset>
 
     <fieldset>
@@ -4393,14 +4394,14 @@ const EVENTS = [
  {
   "n": "Fondazione di Xanten",
   "lat_n": "Colonia Ulpia Traiana",
-  "ys": -15,
+  "ys": 98,
   "ye": 460,
   "luogo": "Xanten",
   "lat": 51.6606,
   "lon": 6.4497,
   "era": "principato",
   "kind": "city",
-  "esito": "Città romana fondata (nome latino Colonia Ulpia Traiana), nell'attuale Germany. Colonia/insediamento romano."
+  "esito": "Correzione: 'Colonia Ulpia Traiana' prende nome da Traiano, che la eresse a colonia proprio nel 98 d.C., anno della sua stessa acclamazione a imperatore nel vicino accampamento legionario — coincidenza che rese il luogo particolarmente caro al nuovo imperatore. Un forte militare preesisteva comunque dall'eta' augustea."
  },
  {
   "n": "Fondazione di Bolzano",
@@ -4643,14 +4644,14 @@ const EVENTS = [
  {
   "n": "Fondazione di Nimega",
   "lat_n": "Ulpia Noviomagus Batavorum",
-  "ys": -50,
+  "ys": 104,
   "ye": 460,
   "luogo": "Nimega",
   "lat": 51.8425,
   "lon": 5.8528,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Città romana fondata (nome latino Ulpia Noviomagus Batavorum), nell'attuale Netherlands. Colonia/insediamento romano."
+  "esito": "Correzione: 'Ulpia Noviomagus Batavorum' prende nome da Traiano, che le concesse lo status di colonia attorno al 104-105 d.C. Un insediamento militare preesisteva comunque dall'eta' augustea."
  },
  {
   "n": "Fondazione di Ptuj",
@@ -5155,28 +5156,6 @@ const EVENTS = [
   "esito": "Centro preesistente (nome latino Colonia Augusta Achaica Patrensis) entrato sotto il controllo romano; non è una fondazione romana ex novo."
  },
  {
-  "n": "Conquista di Tangeri",
-  "lat_n": "Tingi",
-  "ys": -146,
-  "ye": 429,
-  "luogo": "Tangeri",
-  "lat": 35.7595,
-  "lon": -5.834,
-  "era": "repubblica",
-  "kind": "city",
-  "esito": "Centro preesistente (nome latino Tingi) entrato sotto il controllo romano; non è una fondazione romana ex novo. Riconquistata dai Bizantini nel 533-534 (guerra vandalica di Belisario), resta romano-bizantina fino alla conquista araba di Cartagine nel 698.",
-  "periods": [
-   [
-    -146,
-    429
-   ],
-   [
-    533,
-    698
-   ]
-  ]
- },
- {
   "n": "Conquista di Antalya",
   "lat_n": "Attalia",
   "ys": -133,
@@ -5249,14 +5228,14 @@ const EVENTS = [
  {
   "n": "Conquista di Sofia",
   "lat_n": "Ulpia Serdica",
-  "ys": 46,
+  "ys": 106,
   "ye": 680,
   "luogo": "Sofia",
   "lat": 42.6977,
   "lon": 23.3219,
   "era": "principato",
   "kind": "city",
-  "esito": "Centro preesistente (nome latino Ulpia Serdica) entrato sotto il controllo romano; non è una fondazione romana ex novo."
+  "esito": "Correzione: 'Ulpia Serdica' prende nome da Traiano, che le concesse lo status di colonia attorno al 106 d.C. dopo le guerre daciche. Il controllo romano della regione risaliva comunque a decenni prima."
  },
  {
   "n": "Conquista di Celje",
@@ -5309,14 +5288,14 @@ const EVENTS = [
  {
   "n": "Conquista di Cherchell",
   "lat_n": "Colonia Claudia Caesarea",
-  "ys": 44,
+  "ys": -25,
   "ye": 429,
   "luogo": "Cherchell",
   "lat": 36.6106,
   "lon": 2.1944,
   "era": "principato",
   "kind": "city",
-  "esito": "Centro preesistente (nome latino Colonia Claudia Caesarea) entrato sotto il controllo romano; non è una fondazione romana ex novo. Riconquistata dai Bizantini nel 533-534 (guerra vandalica di Belisario), resta romano-bizantina fino alla conquista araba di Cartagine nel 698.",
+  "esito": "Fondata come Iol dai Cartaginesi, rifondata da Giuba II re di Mauretania come propria capitale nel 25 a.C. circa (rinominata Caesarea in onore di Augusto); annessa come provincia romana diretta (Mauretania Caesariensis) nel 44 d.C. dopo l'assassinio di Tolomeo di Mauretania.",
   "periods": [
    [
     44,
@@ -6871,16 +6850,16 @@ const EVENTS = [
   ]
  },
  {
-  "n": "Città romana di Cremona",
+  "n": "Bedriacum",
   "lat_n": "Bedriacum",
-  "ys": -218,
-  "ye": 476,
-  "luogo": "Cremona",
-  "lat": 45.1335,
-  "lon": 10.0227,
+  "ys": 69,
+  "ye": 69,
+  "luogo": "Presso Calvatone, Italia settentrionale",
+  "lat": 45.15,
+  "lon": 10.35,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Centro urbano sotto controllo romano/bizantino nel periodo indicato (nome latino Bedriacum); non è specificato se si tratti di una fondazione romana o di un centro preesistente incorporato. Riconquistata dai Bizantini nella guerra gotica di Giustiniano (535-554); il controllo centralizzato bizantino sull'Italia si esaurisce simbolicamente con la caduta dell'Esarcato di Ravenna nel 751 (alcune regioni, come Sicilia, Puglia e Venezia, restano bizantine o autonome molto più a lungo).",
+  "esito": "Piccola localita' tra Cremona e Mantova, non la citta' di Cremona stessa: teatro delle due battaglie di Bedriacum nel 69 d.C. (gia' presenti in questo catalogo) durante l'anno dei quattro imperatori. [Correzione: era erroneamente registrata come se fosse la citta' di Cremona, con cui non va confusa pur essendo vicina.]",
   "periods": [
    [
     -218,
@@ -7069,16 +7048,16 @@ const EVENTS = [
   ]
  },
  {
-  "n": "Città romana di Bologna, Bulgaria (Vidin)",
+  "n": "Bononia (Vidin)",
   "lat_n": "Bononia",
   "ys": 29,
   "ye": 680,
-  "luogo": "Bologna, Bulgaria (Vidin)",
+  "luogo": "Vidin, Bulgaria",
   "lat": 43.991,
   "lon": 22.8763,
   "era": "principato",
   "kind": "city",
-  "esito": "Centro urbano sotto controllo romano/bizantino nel periodo indicato (nome latino Bononia); non è specificato se si tratti di una fondazione romana o di un centro preesistente incorporato."
+  "esito": "Citta' romana sul Danubio in Mesia Superiore, con lo stesso nome dell'italiana Bononia (Bologna): un caso di omonimia, non un doppione. [Correzione: il campo 'luogo' era erroneamente scritto come 'Bologna, Bulgaria (Vidin)', mescolando le due citta' omonime.]"
  },
  {
   "n": "Città romana di Sofia",
@@ -7091,18 +7070,6 @@ const EVENTS = [
   "era": "repubblica",
   "kind": "city",
   "esito": "Centro urbano sotto controllo romano/bizantino nel periodo indicato (nome latino Serdica); non è specificato se si tratti di una fondazione romana o di un centro preesistente incorporato."
- },
- {
-  "n": "Città romana di Plovdiv",
-  "lat_n": "Philippopolis",
-  "ys": 46,
-  "ye": 680,
-  "luogo": "Plovdiv",
-  "lat": 42.1354,
-  "lon": 24.7453,
-  "era": "principato",
-  "kind": "city",
-  "esito": "Centro urbano sotto controllo romano/bizantino nel periodo indicato (nome latino Philippopolis); non è specificato se si tratti di una fondazione romana o di un centro preesistente incorporato."
  },
  {
   "n": "Città romana di Devnja",
@@ -7127,18 +7094,6 @@ const EVENTS = [
   "era": "principato",
   "kind": "city",
   "esito": "Centro urbano sotto controllo romano/bizantino nel periodo indicato (nome latino Novae); non è specificato se si tratti di una fondazione romana o di un centro preesistente incorporato."
- },
- {
-  "n": "Città romana di Silistra",
-  "lat_n": "Durostorum",
-  "ys": 106,
-  "ye": 680,
-  "luogo": "Silistra",
-  "lat": 44.1167,
-  "lon": 27.2667,
-  "era": "principato",
-  "kind": "city",
-  "esito": "Centro urbano sotto controllo romano/bizantino nel periodo indicato (nome latino Durostorum); non è specificato se si tratti di una fondazione romana o di un centro preesistente incorporato."
  },
  {
   "n": "Città romana di Archar",
@@ -7225,30 +7180,6 @@ const EVENTS = [
   "esito": "Centro urbano sotto controllo romano/bizantino nel periodo indicato (nome latino Callatis); non è specificato se si tratti di una fondazione romana o di un centro preesistente incorporato."
  },
  {
-  "n": "Città romana di Cluj-Napoca",
-  "lat_n": "Napoca",
-  "ys": 108,
-  "ye": 271,
-  "luogo": "Cluj-Napoca",
-  "lat": 46.7712,
-  "lon": 23.6236,
-  "era": "principato",
-  "kind": "city",
-  "esito": "Centro urbano sotto controllo romano/bizantino nel periodo indicato (nome latino Napoca); non è specificato se si tratti di una fondazione romana o di un centro preesistente incorporato."
- },
- {
-  "n": "Città romana di Turda",
-  "lat_n": "Potaissa",
-  "ys": 108,
-  "ye": 271,
-  "luogo": "Turda",
-  "lat": 46.5667,
-  "lon": 23.7833,
-  "era": "principato",
-  "kind": "city",
-  "esito": "Centro urbano sotto controllo romano/bizantino nel periodo indicato (nome latino Potaissa); non è specificato se si tratti di una fondazione romana o di un centro preesistente incorporato."
- },
- {
   "n": "Città romana di Drobeta-Turnu Severin",
   "lat_n": "Drobeta",
   "ys": 103,
@@ -7283,18 +7214,6 @@ const EVENTS = [
   "era": "principato",
   "kind": "city",
   "esito": "Centro urbano sotto controllo romano/bizantino nel periodo indicato (nome latino Singidunum); non è specificato se si tratti di una fondazione romana o di un centro preesistente incorporato."
- },
- {
-  "n": "Città romana di Kostolac",
-  "lat_n": "Viminacium",
-  "ys": 46,
-  "ye": 442,
-  "luogo": "Kostolac",
-  "lat": 44.7333,
-  "lon": 21.2167,
-  "era": "principato",
-  "kind": "city",
-  "esito": "Centro urbano sotto controllo romano/bizantino nel periodo indicato (nome latino Viminacium); non è specificato se si tratti di una fondazione romana o di un centro preesistente incorporato."
  },
  {
   "n": "Città romana di Skopje",
@@ -7453,18 +7372,6 @@ const EVENTS = [
   "esito": "Centro urbano sotto controllo romano/bizantino nel periodo indicato (nome latino Carnuntum); non è specificato se si tratti di una fondazione romana o di un centro preesistente incorporato."
  },
  {
-  "n": "Città romana di Vienna",
-  "lat_n": "Vindobona",
-  "ys": 89,
-  "ye": 488,
-  "luogo": "Vienna",
-  "lat": 48.2082,
-  "lon": 16.3738,
-  "era": "principato",
-  "kind": "city",
-  "esito": "Centro urbano sotto controllo romano/bizantino nel periodo indicato (nome latino Vindobona); non è specificato se si tratti di una fondazione romana o di un centro preesistente incorporato."
- },
- {
   "n": "Città romana di Lorch/Enns",
   "lat_n": "Lauriacum",
   "ys": 180,
@@ -7475,18 +7382,6 @@ const EVENTS = [
   "era": "principato",
   "kind": "city",
   "esito": "Centro urbano sotto controllo romano/bizantino nel periodo indicato (nome latino Lauriacum); non è specificato se si tratti di una fondazione romana o di un centro preesistente incorporato."
- },
- {
-  "n": "Città romana di Salisburgo",
-  "lat_n": "Iuvavum",
-  "ys": -15,
-  "ye": 488,
-  "luogo": "Salisburgo",
-  "lat": 47.8095,
-  "lon": 13.055,
-  "era": "principato",
-  "kind": "city",
-  "esito": "Centro urbano sotto controllo romano/bizantino nel periodo indicato (nome latino Iuvavum); non è specificato se si tratti di una fondazione romana o di un centro preesistente incorporato."
  },
  {
   "n": "Città romana di Bregenz",
@@ -8116,28 +8011,6 @@ const EVENTS = [
   "periods": [
    [
     -46,
-    429
-   ],
-   [
-    533,
-    698
-   ]
-  ]
- },
- {
-  "n": "Città romana di Cherchell",
-  "lat_n": "Caesarea (Mauretania)",
-  "ys": -25,
-  "ye": 429,
-  "luogo": "Cherchell",
-  "lat": 36.6106,
-  "lon": 2.1944,
-  "era": "principato",
-  "kind": "city",
-  "esito": "Centro urbano sotto controllo romano/bizantino nel periodo indicato (nome latino Caesarea (Mauretania)); non è specificato se si tratti di una fondazione romana o di un centro preesistente incorporato. Riconquistata dai Bizantini nel 533-534 (guerra vandalica di Belisario), resta romano-bizantina fino alla conquista araba di Cartagine nel 698.",
-  "periods": [
-   [
-    -25,
     429
    ],
    [
@@ -11737,14 +11610,14 @@ const EVENTS = [
  {
   "n": "Basilea",
   "lat_n": "Basilia",
-  "ys": -44,
+  "ys": 374,
   "ye": 460,
   "luogo": "Basilea, Svizzera",
   "lat": 47.5596,
   "lon": 7.5886,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Capoluogo del cantone di Basilea Città. Castrum romano tardo-antico sul Reno, distinto dalla vicina colonia di Augusta Raurica (Augst, già in questo catalogo)."
+  "esito": "Correzione: la fortezza tardoromana di Basilia (il castrum 'Robur') fu costruita solo verso il 374 d.C. sotto Valentiniano I, quando il vicino centro di Augusta Raurica (gia' in questo catalogo) era ormai in declino — non esisteva alcun insediamento romano significativo qui gia' nel I secolo a.C."
  },
  {
   "n": "Sion",
@@ -12607,14 +12480,14 @@ const EVENTS = [
  {
   "n": "Ratiaria",
   "lat_n": "Colonia Ulpia Traiana Ratiaria",
-  "ys": -29,
+  "ys": 106,
   "ye": 441,
   "luogo": "Archar, Vidin, Bulgaria",
   "lat": 43.8043,
   "lon": 22.8734,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Colonia romana sul Danubio in Mesia, capitale della provincia di Dacia Ripensis in epoca tarda."
+  "esito": "Correzione: il nome completo 'Colonia Ulpia Traiana Ratiaria' contiene DUE riferimenti a Traiano (gens Ulpia e cognomen Traiana, regno 98-117 d.C.), che le concesse lo status di colonia attorno al 106 d.C. dopo le guerre daciche — una fondazione al -29 a.C. era logicamente impossibile, oltre un secolo prima della nascita di Traiano. Un insediamento militare romano esisteva pero' gia' dalle campagne di Crasso in Mesia (29-28 a.C.)."
  },
  {
   "n": "Nicopolis ad Nestum",
@@ -12691,14 +12564,14 @@ const EVENTS = [
  {
   "n": "Oescus",
   "lat_n": "Colonia Ulpia Oescensium",
-  "ys": 10,
+  "ys": 106,
   "ye": 441,
   "luogo": "Gigen, Pleven, Bulgaria",
   "lat": 43.7,
   "lon": 24.5,
   "era": "principato",
   "kind": "city",
-  "esito": "Colonia romana sul Danubio in Mesia, sede della V legione Macedonica."
+  "esito": "Correzione: il nome 'Colonia Ulpia Oescensium' deriva da Traiano (nome gentilizio Ulpius, regno 98-117 d.C.), che le concesse lo status di colonia attorno al 106 d.C. dopo le guerre daciche — una data di fondazione del 10 d.C. era logicamente impossibile, decenni prima della nascita dello stesso Traiano. Un accampamento legionario esisteva pero' gia' in eta' giulio-claudia (V legione Macedonica)."
  },
  {
   "n": "Aquae Calidae",
@@ -12739,26 +12612,26 @@ const EVENTS = [
  {
   "n": "Augusta Traiana",
   "lat_n": "Ulpia Augusta Traiana",
-  "ys": 46,
+  "ys": 106,
   "ye": 441,
   "luogo": "Stara Zagora, Bulgaria",
   "lat": 42.4258,
   "lon": 25.6345,
   "era": "principato",
   "kind": "city",
-  "esito": "Città romana in Tracia, fondata o rifondata sotto Traiano."
+  "esito": "Correzione: il nome stesso include 'Traiana'; la citta' fu fondata o elevata a rango cittadino da Traiano attorno al 106 d.C., non genericamente dal 46 d.C. (data di annessione della Tracia come provincia, troppo precoce per un nome che celebra Traiano)."
  },
  {
   "n": "Diocletianopolis",
   "lat_n": "Diocletianopolis",
-  "ys": 46,
+  "ys": 294,
   "ye": 441,
   "luogo": "Hisarya, Bulgaria",
   "lat": 42.5,
   "lon": 24.7,
   "era": "principato",
   "kind": "city",
-  "esito": "Stazione termale della Tracia romana, poi rinominata in onore di Diocleziano."
+  "esito": "Correzione: il nome deriva da Diocleziano (regno 284-305 d.C.), che riorganizzo' amministrativamente la Tracia attorno al 293-294 d.C. — non poteva quindi risalire al 46 d.C., due secoli prima della nascita dello stesso Diocleziano."
  },
  {
   "n": "Sexaginta Prista",
@@ -12847,38 +12720,38 @@ const EVENTS = [
  {
   "n": "Poitiers",
   "lat_n": "Lemonum",
-  "ys": -27,
+  "ys": -51,
   "ye": 486,
   "luogo": "Poitiers, Francia",
   "lat": 46.5802,
   "lon": 0.3404,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Capitale della civitas dei Pictoni in Gallia Aquitania."
+  "esito": "Capitale della civitas dei Pictoni in Gallia Aquitania. [Data corretta: -51 (fine della guerra gallica di Cesare) invece della generica riorganizzazione augustea del -27.]"
  },
  {
   "n": "Chartres",
   "lat_n": "Autricum",
-  "ys": -27,
+  "ys": -51,
   "ye": 486,
   "luogo": "Chartres, Francia",
   "lat": 48.4467,
   "lon": 1.4892,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Capitale della civitas dei Carnuti, popolo custode del principale santuario druidico della Gallia."
+  "esito": "Capitale della civitas dei Carnuti, popolo custode del principale santuario druidico della Gallia. [Data corretta: -51 (fine della guerra gallica di Cesare) invece della generica riorganizzazione augustea del -27.]"
  },
  {
   "n": "Clermont-Ferrand",
   "lat_n": "Augustonemetum",
-  "ys": -27,
+  "ys": -51,
   "ye": 486,
   "luogo": "Clermont-Ferrand, Francia",
   "lat": 45.7772,
   "lon": 3.087,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Capitale della civitas degli Arverni, uno dei popoli più potenti della Gallia preromana."
+  "esito": "Capitale della civitas degli Arverni, uno dei popoli più potenti della Gallia preromana. [Data corretta: -51 (fine della guerra gallica di Cesare) invece della generica riorganizzazione augustea del -27.]"
  },
  {
   "n": "Limoges",
@@ -12895,38 +12768,38 @@ const EVENTS = [
  {
   "n": "Angers",
   "lat_n": "Iuliomagus",
-  "ys": -27,
+  "ys": -51,
   "ye": 486,
   "luogo": "Angers, Francia",
   "lat": 47.4784,
   "lon": -0.5632,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Capitale della civitas degli Andecavi in Gallia Lugdunense."
+  "esito": "Capitale della civitas degli Andecavi in Gallia Lugdunense. [Data corretta: -51 (fine della guerra gallica di Cesare) invece della generica riorganizzazione augustea del -27.]"
  },
  {
   "n": "Le Mans",
   "lat_n": "Vindinium",
-  "ys": -27,
+  "ys": -51,
   "ye": 486,
   "luogo": "Le Mans, Francia",
   "lat": 48.0061,
   "lon": 0.1996,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Capitale della civitas dei Cenomani in Gallia Lugdunense."
+  "esito": "Capitale della civitas dei Cenomani in Gallia Lugdunense. [Data corretta: -51 (fine della guerra gallica di Cesare) invece della generica riorganizzazione augustea del -27.]"
  },
  {
   "n": "Arras",
   "lat_n": "Nemetacum Atrebatum",
-  "ys": -27,
+  "ys": -51,
   "ye": 486,
   "luogo": "Arras, Francia",
   "lat": 50.2919,
   "lon": 2.7775,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Capitale della civitas degli Atrebati in Gallia Belgica."
+  "esito": "Capitale della civitas degli Atrebati in Gallia Belgica. [Data corretta: -51 (fine della guerra gallica di Cesare) invece della generica riorganizzazione augustea del -27.]"
  },
  {
   "n": "Martigny",
@@ -13015,14 +12888,14 @@ const EVENTS = [
  {
   "n": "Bilbilis",
   "lat_n": "Bilbilis",
-  "ys": -90,
+  "ys": -133,
   "ye": 470,
   "luogo": "Calatayud, Spagna",
   "lat": 41.3736,
   "lon": -1.6169,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Municipium celtiberico-romano, città natale del poeta Marziale."
+  "esito": "Municipium celtiberico-romano, città natale del poeta Marziale. [Data affinata: -133, anno della caduta di Numanzia e della definitiva pacificazione della Celtiberia, invece di una generica stima al -90.]"
  },
  {
   "n": "Canatha",
@@ -13046,7 +12919,17 @@ const EVENTS = [
   "lon": 1.3,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Colonia romana sulla costa della Mauretania Caesariensis."
+  "esito": "Colonia romana sulla costa della Mauretania Caesariensis.",
+  "periods": [
+   [
+    -33,
+    429
+   ],
+   [
+    533,
+    698
+   ]
+  ]
  },
  {
   "n": "Castulo",
@@ -13082,7 +12965,17 @@ const EVENTS = [
   "lon": 5.7367,
   "era": "principato",
   "kind": "city",
-  "esito": "Colonia romana fondata da Nerva in Numidia, con uno dei siti archeologici meglio conservati del Nordafrica."
+  "esito": "Colonia romana fondata da Nerva in Numidia, con uno dei siti archeologici meglio conservati del Nordafrica.",
+  "periods": [
+   [
+    96,
+    429
+   ],
+   [
+    533,
+    698
+   ]
+  ]
  },
  {
   "n": "Cularo",
@@ -13130,7 +13023,17 @@ const EVENTS = [
   "lon": 7.8833,
   "era": "principato",
   "kind": "city",
-  "esito": "Municipium romano in Numidia, città natale dello scrittore Apuleio e sede degli studi giovanili di Sant'Agostino."
+  "esito": "Municipium romano in Numidia, città natale dello scrittore Apuleio e sede degli studi giovanili di Sant'Agostino.",
+  "periods": [
+   [
+    75,
+    429
+   ],
+   [
+    533,
+    698
+   ]
+  ]
  },
  {
   "n": "Metellinum",
@@ -13166,7 +13069,17 @@ const EVENTS = [
   "lon": 8.6333,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Città dell'Africa Proconsolare, celebre per le cave del pregiato marmo giallo numidico (giallo antico)."
+  "esito": "Città dell'Africa Proconsolare, celebre per le cave del pregiato marmo giallo numidico (giallo antico).",
+  "periods": [
+   [
+    -46,
+    439
+   ],
+   [
+    533,
+    698
+   ]
+  ]
  },
  {
   "n": "Thysdrus",
@@ -13178,7 +13091,17 @@ const EVENTS = [
   "lon": 10.7167,
   "era": "principato",
   "kind": "city",
-  "esito": "Città dell'Africa Proconsolare, ricca per la produzione di olio d'oliva; vi sorge uno dei più grandi anfiteatri del mondo romano."
+  "esito": "Città dell'Africa Proconsolare, ricca per la produzione di olio d'oliva; vi sorge uno dei più grandi anfiteatri del mondo romano.",
+  "periods": [
+   [
+    46,
+    439
+   ],
+   [
+    533,
+    698
+   ]
+  ]
  },
  {
   "n": "Xanthus",
@@ -13478,14 +13401,14 @@ const EVENTS = [
  {
   "n": "Heliopolis (Baalbek)",
   "lat_n": "Heliopolis",
-  "ys": 15,
+  "ys": -15,
   "ye": 636,
   "luogo": "Baalbek, Libano",
   "lat": 34.0061,
   "lon": 36.2039,
   "era": "principato",
   "kind": "city",
-  "esito": "Grande santuario e colonia romana (Colonia Iulia Augusta Felix Heliopolitana) nella valle della Beqaa, con uno dei più imponenti complessi templari del mondo romano."
+  "esito": "Grande santuario e colonia romana (Colonia Iulia Augusta Felix Heliopolitana) nella valle della Beqaa, con uno dei più imponenti complessi templari del mondo romano. [Corretto: -15 a.C. (colonizzazione di veterani sotto Augusto, legata a Berito), non 15 d.C. come erroneamente segnato in precedenza.]"
  },
  {
   "n": "Byblos",
@@ -13587,25 +13510,45 @@ const EVENTS = [
   "n": "Musti",
   "lat_n": "Musti",
   "ys": -46,
-  "ye": 698,
+  "ye": 439,
   "luogo": "El Krib, Tunisia",
   "lat": 36.3361,
   "lon": 9.1431,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Municipium dell'Africa Proconsolare, con un arco di trionfo e un tempio ancora ben conservati."
+  "esito": "Municipium dell'Africa Proconsolare, con un arco di trionfo e un tempio ancora ben conservati. [Corretto: aggiunta l'interruzione vandala (439-533), coerente col resto del catalogo.]",
+  "periods": [
+   [
+    -46,
+    439
+   ],
+   [
+    533,
+    698
+   ]
+  ]
  },
  {
   "n": "Gigthis",
   "lat_n": "Gigthis",
   "ys": -46,
-  "ye": 698,
+  "ye": 439,
   "luogo": "Boughrara, Tunisia",
   "lat": 33.5327,
   "lon": 10.6775,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Porto commerciale romano sul Golfo di Gabès, noto per il suo foro con statue imperiali."
+  "esito": "Porto commerciale romano sul Golfo di Gabès, noto per il suo foro con statue imperiali. [Corretto: aggiunta l'interruzione vandala (439-533), coerente col trattamento delle altre citta' dell'Africa Proconsolare in questo catalogo.]",
+  "periods": [
+   [
+    -46,
+    439
+   ],
+   [
+    533,
+    698
+   ]
+  ]
  },
  {
   "n": "Diana Veteranorum",
@@ -13617,7 +13560,17 @@ const EVENTS = [
   "lon": 6.0803,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Colonia per veterani in Numidia, fondata sotto Traiano."
+  "esito": "Colonia per veterani in Numidia, fondata sotto Traiano.",
+  "periods": [
+   [
+    -33,
+    429
+   ],
+   [
+    533,
+    698
+   ]
+  ]
  },
  {
   "n": "Thibilis",
@@ -13629,7 +13582,17 @@ const EVENTS = [
   "lon": 7.2505,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Municipium romano in Numidia."
+  "esito": "Municipium romano in Numidia.",
+  "periods": [
+   [
+    -46,
+    429
+   ],
+   [
+    533,
+    698
+   ]
+  ]
  },
  {
   "n": "Igilgili",
@@ -13641,7 +13604,17 @@ const EVENTS = [
   "lon": 5.7657,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Colonia romana sulla costa della Mauretania Caesariensis."
+  "esito": "Colonia romana sulla costa della Mauretania Caesariensis.",
+  "periods": [
+   [
+    -33,
+    429
+   ],
+   [
+    533,
+    698
+   ]
+  ]
  },
  {
   "n": "Rusuccuru",
@@ -13653,7 +13626,17 @@ const EVENTS = [
   "lon": 3.9224,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Colonia romana sulla costa della Mauretania Caesariensis."
+  "esito": "Colonia romana sulla costa della Mauretania Caesariensis.",
+  "periods": [
+   [
+    -33,
+    429
+   ],
+   [
+    533,
+    698
+   ]
+  ]
  },
  {
   "n": "Tubusuctu",
@@ -13665,7 +13648,17 @@ const EVENTS = [
   "lon": 4.8557,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Colonia romana per veterani in Mauretania Caesariensis."
+  "esito": "Colonia romana per veterani in Mauretania Caesariensis.",
+  "periods": [
+   [
+    -33,
+    429
+   ],
+   [
+    533,
+    698
+   ]
+  ]
  },
  {
   "n": "Satafis",
@@ -13677,19 +13670,17 @@ const EVENTS = [
   "lon": 5.5025,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Municipium romano in Mauretania Caesariensis."
- },
- {
-  "n": "Tacape",
-  "lat_n": "Tacape",
-  "ys": -46,
-  "ye": 698,
-  "luogo": "Gabès, Tunisia",
-  "lat": 33.8786,
-  "lon": 10.0967,
-  "era": "repubblica",
-  "kind": "city",
-  "esito": "Città romana sul Golfo di Gabès, gia' presente in questo catalogo con il nome tardo di Tacapae ma qui documentata separatamente dalla fonte DARE."
+  "esito": "Municipium romano in Mauretania Caesariensis.",
+  "periods": [
+   [
+    -33,
+    429
+   ],
+   [
+    533,
+    698
+   ]
+  ]
  },
  {
   "n": "Aizanoi",
@@ -13714,18 +13705,6 @@ const EVENTS = [
   "era": "principato",
   "kind": "city",
   "esito": "Città-santuario della Pisidia, tra i siti archeologici romani meglio conservati della Turchia."
- },
- {
-  "n": "Tomi (Costanza)",
-  "lat_n": "Tomis",
-  "ys": -72,
-  "ye": 614,
-  "luogo": "Costanza, Romania",
-  "lat": 44.1733,
-  "lon": 28.6383,
-  "era": "repubblica",
-  "kind": "city",
-  "esito": "Colonia greca sul Mar Nero, poi città romana della Mesia inferiore; luogo di esilio del poeta Ovidio dall'8 al 17 d.C."
  },
  {
   "n": "Babilonia",
@@ -14004,30 +13983,6 @@ const EVENTS = [
   "esito": "Antica colonia greca sul Mar Nero, poi città romana della Mesia inferiore."
  },
  {
-  "n": "Corinthus",
-  "lat_n": "Corinthus",
-  "ys": -146,
-  "ye": 1204,
-  "luogo": "Archaia Korinthos, Greece",
-  "lat": 37.9063291644,
-  "lon": 22.8808413925,
-  "era": "repubblica",
-  "kind": "city",
-  "esito": "Città della provincia romana di Achaia. The ancient Greek and Roman city of Corinth, located in the Peloponnese, Greece. Also known today as Archaia Korinthos and not to be confused with the nearby modern town."
- },
- {
-  "n": "Athenae",
-  "lat_n": "Athenae",
-  "ys": -146,
-  "ye": 1204,
-  "luogo": "Athens, Greece",
-  "lat": 37.972453603,
-  "lon": 23.726268222,
-  "era": "repubblica",
-  "kind": "city",
-  "esito": "Città della provincia romana di Achaia. A major Greek city-state and the principal city of Attika. Modern Athens in Greece."
- },
- {
   "n": "Aelium Augustum",
   "lat_n": "Aelium Augustum",
   "ys": -15,
@@ -14138,14 +14093,14 @@ const EVENTS = [
  {
   "n": "Arae Flaviae",
   "lat_n": "Arae Flaviae",
-  "ys": 50,
+  "ys": 73,
   "ye": 406,
   "luogo": "Rottweil, Germany",
   "lat": 48.166687,
   "lon": 8.627925,
   "era": "principato",
   "kind": "city",
-  "esito": "Città della provincia romana di Germania Superior. Arae Flaviae (Rottweil) was founded as a Roman municipium in A.D. 73. by Cn. Pinarius Clemens."
+  "esito": "Correzione: il nome 'Flaviae' deriva dalla dinastia Flavia (Vespasiano/Domiziano, dal 69 d.C.); l'insediamento fu fondato o elevato di rango attorno al 73 d.C., non nel 50."
  },
  {
   "n": "Argos",
@@ -14223,13 +14178,13 @@ const EVENTS = [
   "n": "Cydonea",
   "lat_n": "Cydonea",
   "ys": -67,
-  "ye": 645,
+  "ye": 824,
   "luogo": "Khania, Greece",
   "lat": 35.515775,
   "lon": 24.01869,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Città della provincia romana di Creta et Cyrenaica. An ancient settlement on Crete inhabited since the Neolithic period, Kydonia has been a major center of Minoan, Greek, and Byzantine civilization."
+  "esito": "Città della provincia romana di Creta et Cyrenaica. An ancient settlement on Crete inhabited since the Neolithic period, Kydonia has been a major center of Minoan, Greek, and Byzantine civilization. [Corretto: Creta fu conquistata dagli Arabi solo nell'824 d.C. (sotto Abu Hafs), non nel 643-645 come la Cirenaica sulla terraferma libica — le due regioni erano amministrativamente unite in eta' romana ma ebbero sorti diverse.]"
  },
  {
   "n": "Damascus",
@@ -14319,13 +14274,13 @@ const EVENTS = [
   "n": "Hierapytna",
   "lat_n": "Hierapytna",
   "ys": -67,
-  "ye": 645,
+  "ye": 824,
   "luogo": "Ierapetra, Greece",
   "lat": 35.0095285,
   "lon": 25.7387505,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Città della provincia romana di Creta et Cyrenaica. An ancient place, cited: BAtlas 60 E2 Hierapytna"
+  "esito": "Città della provincia romana di Creta et Cyrenaica. An ancient place, cited: BAtlas 60 E2 Hierapytna [Corretto: Creta fu conquistata dagli Arabi solo nell'824 d.C. (sotto Abu Hafs), non nel 643-645 come la Cirenaica sulla terraferma libica — le due regioni erano amministrativamente unite in eta' romana ma ebbero sorti diverse.]"
  },
  {
   "n": "Iulia Aug. Felix Germa",
@@ -14343,13 +14298,13 @@ const EVENTS = [
   "n": "Iulia Nobilis Cnosos",
   "lat_n": "Iulia Nobilis Cnosos",
   "ys": -67,
-  "ye": 645,
+  "ye": 824,
   "luogo": "Knossos, Greece",
   "lat": 35.297847,
   "lon": 25.163106,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Città della provincia romana di Creta et Cyrenaica. A major ancient settlement of Crete located some 5 km southeast of Heraklion, Knossos was occupied from the Neolithic period to the time of the Roman empire."
+  "esito": "Città della provincia romana di Creta et Cyrenaica. A major ancient settlement of Crete located some 5 km southeast of Heraklion, Knossos was occupied from the Neolithic period to the time of the Roman empire. [Corretto: Creta fu conquistata dagli Arabi solo nell'824 d.C. (sotto Abu Hafs), non nel 643-645 come la Cirenaica sulla terraferma libica — le due regioni erano amministrativamente unite in eta' romana ma ebbero sorti diverse.]"
  },
  {
   "n": "Lanuvium",
@@ -14391,13 +14346,13 @@ const EVENTS = [
   "n": "Lyctus",
   "lat_n": "Lyctus",
   "ys": -67,
-  "ye": 645,
+  "ye": 824,
   "luogo": "Xydas, Greece",
   "lat": 35.2081,
   "lon": 25.3682,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Città della provincia romana di Creta et Cyrenaica. An ancient settlement on Crete, located just east of modern Xydas/Xidas, with which it is sometimes conflated. The city is mentioned in Homer and seems to have flourished in Hellenistic and Roman times, at least."
+  "esito": "Città della provincia romana di Creta et Cyrenaica. An ancient settlement on Crete, located just east of modern Xydas/Xidas, with which it is sometimes conflated. The city is mentioned in Homer and seems to have flourished in Hellenistic and Roman times, at least. [Corretto: Creta fu conquistata dagli Arabi solo nell'824 d.C. (sotto Abu Hafs), non nel 643-645 come la Cirenaica sulla terraferma libica — le due regioni erano amministrativamente unite in eta' romana ma ebbero sorti diverse.]"
  },
  {
   "n": "Mantinea",
@@ -14712,14 +14667,14 @@ const EVENTS = [
  {
   "n": "Abella",
   "lat_n": "Abella",
-  "ys": -89,
+  "ys": -332,
   "ye": 476,
   "luogo": "Avella, Italy",
   "lat": 40.965054,
   "lon": 14.6003925,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Città della provincia romana di Italia. Abella was an ancient settlement of Campania of Samnite origin."
+  "esito": "Città alleata dei Latini, ricevette la cittadinanza romana senza diritto di voto (civitas sine suffragio) nel 332 a.C., molto prima della cittadinanza piena estesa a tutta Italia dopo la guerra sociale."
  },
  {
   "n": "Abellinum",
@@ -14780,14 +14735,14 @@ const EVENTS = [
  {
   "n": "Acerrae",
   "lat_n": "Acerrae",
-  "ys": -89,
+  "ys": -332,
   "ye": 476,
   "luogo": "Acerra, Italy",
   "lat": 40.946092,
   "lon": 14.371233,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Città della provincia romana di Italia. Acerrae was an ancient Oscan city of Campania, perhaps originally named Akeru. The Romans granted it civitas sine suffragio in 332 BC."
+  "esito": "Città campana, ricevette la civitas sine suffragio nel 332 a.C. insieme alle altre comunità della regione, restando fedele a Roma anche durante l'invasione di Annibale."
  },
  {
   "n": "Acmonia",
@@ -15408,14 +15363,14 @@ const EVENTS = [
  {
   "n": "Aquae Flaviae",
   "lat_n": "Aquae Flaviae",
-  "ys": -218,
+  "ys": 79,
   "ye": 470,
   "luogo": "Chaves, Portugal",
   "lat": 41.74035,
   "lon": -7.4700075,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Città della provincia romana di Hispania Tarraconensis. Aquae Flaviae (modern Chaves, Portugal)."
+  "esito": "Correzione: il nome 'Aquae Flaviae' (le 'acque flavie') deriva dalla dinastia Flavia; la citta' ricevette questo nome e lo status municipale sotto Vespasiano attorno al 79 d.C. — non poteva quindi risalire al 218 a.C., quasi tre secoli prima."
  },
  {
   "n": "Arausio",
@@ -15444,14 +15399,14 @@ const EVENTS = [
  {
   "n": "Argentomagus",
   "lat_n": "Argentomagus",
-  "ys": -27,
+  "ys": -51,
   "ye": 486,
   "luogo": "Argenton sur Creuse, France",
   "lat": 46.594036,
   "lon": 1.51722,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Città della provincia romana di Gallia Aquitania. *Argentomagus was a pre-Roman and later Roman settlement in the territory of the Bituriges tribe."
+  "esito": "Città della provincia romana di Gallia Aquitania. *Argentomagus was a pre-Roman and later Roman settlement in the territory of the Bituriges tribe. [Data corretta: -51 (fine della guerra gallica di Cesare) invece della generica riorganizzazione augustea del -27.]"
  },
  {
   "n": "Ariassus",
@@ -15893,7 +15848,17 @@ const EVENTS = [
   "lon": 37.1628351411,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Città della provincia romana di Syria. The ancient city of Aleppo, located in modern Syria, where extensive elements of Hittite, Hellenistic, Roman, Byzantine, Ayyubid, and Umayyad architecture are incorporated into the urban fabric of the modern city."
+  "esito": "Città della provincia romana di Syria. The ancient city of Aleppo, located in modern Syria, where extensive elements of Hittite, Hellenistic, Roman, Byzantine, Ayyubid, and Umayyad architecture are incorporated into the urban fabric of the modern city. Riconquistata dai Bizantini sotto Niceforo Foca nel 969 insieme ad Antiochia (gia' in questo catalogo), Aleppo torna pero' sotto sovranita' araba (Mirdasidi) gia' nel 1015-1025, prima della definitiva perdita bizantina della regione.",
+  "periods": [
+   [
+    -64,
+    636
+   ],
+   [
+    969,
+    1015
+   ]
+  ]
  },
  {
   "n": "Bida",
@@ -16433,13 +16398,13 @@ const EVENTS = [
   "n": "Chersonasos",
   "lat_n": "Chersonasos",
   "ys": -67,
-  "ye": 645,
+  "ye": 824,
   "luogo": "Limin Khersonisos, Greece",
   "lat": 35.319165,
   "lon": 25.388567,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Città della provincia romana di Creta et Cyrenaica. An ancient place, cited: BAtlas 60 D2 Chersonasos"
+  "esito": "Città della provincia romana di Creta et Cyrenaica. An ancient place, cited: BAtlas 60 D2 Chersonasos [Corretto: Creta fu conquistata dagli Arabi solo nell'824 d.C. (sotto Abu Hafs), non nel 643-645 come la Cirenaica sulla terraferma libica — le due regioni erano amministrativamente unite in eta' romana ma ebbero sorti diverse.]"
  },
  {
   "n": "Chios",
@@ -16561,13 +16526,13 @@ const EVENTS = [
   "n": "Cisamus",
   "lat_n": "Cisamus",
   "ys": -67,
-  "ye": 645,
+  "ye": 824,
   "luogo": "Kastelli Kisamou, Greece",
   "lat": 35.495307,
   "lon": 23.660727,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Città della provincia romana di Creta et Cyrenaica. An ancient place, cited: BAtlas 60 A2 Kisamos"
+  "esito": "Città della provincia romana di Creta et Cyrenaica. An ancient place, cited: BAtlas 60 A2 Kisamos [Corretto: Creta fu conquistata dagli Arabi solo nell'824 d.C. (sotto Abu Hafs), non nel 643-645 come la Cirenaica sulla terraferma libica — le due regioni erano amministrativamente unite in eta' romana ma ebbero sorti diverse.]"
  },
  {
   "n": "Citium",
@@ -17074,14 +17039,14 @@ const EVENTS = [
  {
   "n": "Divona",
   "lat_n": "Divona",
-  "ys": -27,
+  "ys": -51,
   "ye": 486,
   "luogo": "Cahors, France",
   "lat": 44.4463125,
   "lon": 1.4417145,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Città della provincia romana di Gallia Aquitania. Divona (Cahors) was the capital of the civitas of the Cadurci throughout the Roman period. It takes its name from a sacred spring (likely the Fontaine des Chartreux) and a ford on the Lot river."
+  "esito": "Città della provincia romana di Gallia Aquitania. Divona (Cahors) was the capital of the civitas of the Cadurci throughout the Roman period. It takes its name from a sacred spring (likely the Fontaine des Chartreux) and a ford on the Lot river. [Data corretta: -51 (fine della guerra gallica di Cesare) invece della generica riorganizzazione augustea del -27.]"
  },
  {
   "n": "Domavium",
@@ -17374,14 +17339,14 @@ const EVENTS = [
  {
   "n": "Flavia Solva",
   "lat_n": "Flavia Solva",
-  "ys": -15,
+  "ys": 70,
   "ye": 488,
   "luogo": "Solfeld, Austria",
   "lat": 46.767482,
   "lon": 15.562997,
   "era": "principato",
   "kind": "city",
-  "esito": "Città della provincia romana di Noricum. Flavia Solva was a Celtic-Roman settlement located on the banks of the Mur river in Noricum."
+  "esito": "Correzione: il nome 'Flavia' deriva dalla dinastia Flavia; il centro fu elevato a municipium sotto Vespasiano attorno al 70 d.C., non nel 15 a.C. (quando esisteva pero' gia' un insediamento precedente in eta' claudia)."
  },
  {
   "n": "Formiae",
@@ -17398,14 +17363,14 @@ const EVENTS = [
  {
   "n": "Forum Hadriani",
   "lat_n": "Forum Hadriani",
-  "ys": 50,
+  "ys": 121,
   "ye": 406,
   "luogo": "Arentsburg, Netherlands",
   "lat": 52.0602193,
   "lon": 4.3486726,
   "era": "principato",
   "kind": "city",
-  "esito": "Città della provincia romana di Germania Inferior. Aurelium Cananefatium/Forum Hadriani (modern Voorburg) was the northernmost Roman city on the European continent. It was destroyed ca. AD 270."
+  "esito": "Correzione: il nome stesso ricorda la visita dell'imperatore Adriano nelle province nordoccidentali, databile al 121-122 d.C. — non poteva quindi risalire al 50 d.C."
  },
  {
   "n": "Forum Iulii",
@@ -17470,14 +17435,14 @@ const EVENTS = [
  {
   "n": "Genetiva Iulia",
   "lat_n": "Genetiva Iulia",
-  "ys": -206,
+  "ys": -45,
   "ye": 470,
   "luogo": "Osuna, Spain",
   "lat": 37.246621,
   "lon": -5.099275,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Città della provincia romana di Hispania Baetica. At the modern town of Osuna in Spain's Seville province, archaeological investigation has revealed an extensive Roman-era settlement. In 2022, an earlier \"Phoenician\" necropolis was discovered."
+  "esito": "Correzione: il nome stesso ('Genetiva Iulia') rivela che questa non e' una generica citta' della Baetica romana dal 206 a.C., ma una colonia specifica fondata da Cesare nel 45 a.C. dopo la battaglia di Munda (Colonia Genetiva Iulia Urbanorum), per premiare i propri veterani."
  },
  {
   "n": "Gonnus",
@@ -17898,14 +17863,14 @@ const EVENTS = [
  {
   "n": "Iulia Augusta Hadriana",
   "lat_n": "Iulia Augusta Hadriana",
-  "ys": 43,
+  "ys": 130,
   "ye": 1071,
   "luogo": "Iulia Augusta Hadriana, Türkiye",
   "lat": 38.0148725,
   "lon": 30.7878535,
   "era": "principato",
   "kind": "city",
-  "esito": "Città della provincia romana di Lycia et Pamphylia. An ancient place, cited: BAtlas 65 E1 Parlais/Col. Iulia Augusta Hadriana"
+  "esito": "Correzione: il nome include esplicitamente 'Hadriana', databile al periodo del regno di Adriano (117-138 d.C.) o del suo tour in Asia Minore (circa 129-131 d.C.) — non poteva risalire al 43 d.C."
  },
  {
   "n": "Iulia Concordia",
@@ -17964,18 +17929,6 @@ const EVENTS = [
   "era": "principato",
   "kind": "city",
   "esito": "Città della provincia romana di Galatia et Cappadocia. An ancient place, cited: BAtlas 66 A1 Lystra/Col. Iulia Felix Gemina"
- },
- {
-  "n": "Iulia Gemella",
-  "lat_n": "Iulia Gemella",
-  "ys": -218,
-  "ye": 470,
-  "luogo": "Guadix el Viejo, Spain",
-  "lat": 37.300309,
-  "lon": -3.134636,
-  "era": "repubblica",
-  "kind": "city",
-  "esito": "Città della provincia romana di Hispania Tarraconensis. An ancient place, cited: BAtlas 27 B4 Acci/Col. Iulia Gemella"
  },
  {
   "n": "Iulia Myrtilis",
@@ -18402,14 +18355,14 @@ const EVENTS = [
  {
   "n": "Lugdunum Convenarum",
   "lat_n": "Lugdunum Convenarum",
-  "ys": -27,
+  "ys": -51,
   "ye": 486,
   "luogo": "S. Bertrand de Comminges, France",
   "lat": 43.0270135,
   "lon": 0.5722425,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Città della provincia romana di Gallia Aquitania. Lugdunum Convenarum (modern Saint-Bertrand-de-Comminges) was founded by Cnaeus Pompeius as a Roman colony in 72 BC. The site defended the Aran valley and the approaches to Iberia."
+  "esito": "Città della provincia romana di Gallia Aquitania. Lugdunum Convenarum (modern Saint-Bertrand-de-Comminges) was founded by Cnaeus Pompeius as a Roman colony in 72 BC. The site defended the Aran valley and the approaches to Iberia. [Data corretta: -51 (fine della guerra gallica di Cesare) invece della generica riorganizzazione augustea del -27.]"
  },
  {
   "n": "Lycopolis",
@@ -18980,14 +18933,14 @@ const EVENTS = [
  {
   "n": "Numantia",
   "lat_n": "Numantia",
-  "ys": -218,
+  "ys": -133,
   "ye": 470,
   "luogo": "Numancia, Spain",
   "lat": 41.809388242,
   "lon": -2.44433338524,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Città della provincia romana di Hispania Tarraconensis. An ancient place, cited: BAtlas 25 C4 Numantia"
+  "esito": "Correzione importante: Numanzia non fu sotto controllo romano dal 218 a.C. — al contrario, fu il piu' ostinato focolaio di resistenza celtiberica, capace di respingere gli eserciti romani per oltre un decennio, finche' Scipione Emiliano non la espugno' e rase al suolo nel 133 a.C. dopo un lungo assedio (gia' presente in questo catalogo). La data di 'ingresso nel mondo romano' qui corrisponde quindi alla sua stessa distruzione."
  },
  {
   "n": "Numluli",
@@ -19563,13 +19516,13 @@ const EVENTS = [
   "n": "Polyrrhenium",
   "lat_n": "Polyrrhenium",
   "ys": -67,
-  "ye": 645,
+  "ye": 824,
   "luogo": "Polyrrhinia, Greece",
   "lat": 35.466785,
   "lon": 23.657098,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Città della provincia romana di Creta et Cyrenaica. Polyrrenia was an important ancient city of western Crete."
+  "esito": "Città della provincia romana di Creta et Cyrenaica. Polyrrenia was an important ancient city of western Crete. [Corretto: Creta fu conquistata dagli Arabi solo nell'824 d.C. (sotto Abu Hafs), non nel 643-645 come la Cirenaica sulla terraferma libica — le due regioni erano amministrativamente unite in eta' romana ma ebbero sorti diverse.]"
  },
  {
   "n": "Pompeiopolis",
@@ -20052,14 +20005,14 @@ const EVENTS = [
  {
   "n": "Saticula",
   "lat_n": "Saticula",
-  "ys": -89,
+  "ys": -313,
   "ye": 476,
   "luogo": "S. Agata de Goti, Italy",
   "lat": 41.090948,
   "lon": 14.501299,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Città della provincia romana di Italia. Saticula was a Samnite site in Campania that received a Latin colony in 313 B.C."
+  "esito": "Correzione: conquistata da Roma nel 343 a.C. durante la prima guerra sannitica, divenne colonia latina nel 313 a.C. — non genericamente dall'89 a.C."
  },
  {
   "n": "Saturnia",
@@ -20194,14 +20147,14 @@ const EVENTS = [
  {
   "n": "Segodunum",
   "lat_n": "Segodunum",
-  "ys": -27,
+  "ys": -51,
   "ye": 486,
   "luogo": "Rodez, France",
   "lat": 44.350497,
   "lon": 2.573846,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Città della provincia romana di Gallia Aquitania. Segodunum was a Gallic oppidum and later a Gallo-Roman town."
+  "esito": "Città della provincia romana di Gallia Aquitania. Segodunum was a Gallic oppidum and later a Gallo-Roman town. [Data corretta: -51 (fine della guerra gallica di Cesare) invece della generica riorganizzazione augustea del -27.]"
  },
  {
   "n": "Seleucia ad Calycadnum",
@@ -20348,14 +20301,14 @@ const EVENTS = [
  {
   "n": "Setia",
   "lat_n": "Setia",
-  "ys": -89,
+  "ys": -382,
   "ye": 476,
   "luogo": "Sezze, Italy",
   "lat": 41.498686,
   "lon": 13.058914,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Città della provincia romana di Italia. A Volscian settlement of the fifth century B.C. that became a Latin colony in 382 B.C."
+  "esito": "Correzione: fondata come colonia latina nel 382 a.C. insieme a Signia, secondo la testimonianza di Livio — tra le piu' antiche colonie latine, non genericamente dall'89 a.C."
  },
  {
   "n": "Siarum",
@@ -20406,14 +20359,14 @@ const EVENTS = [
  {
   "n": "Signia",
   "lat_n": "Signia",
-  "ys": -89,
+  "ys": -382,
   "ye": 476,
   "luogo": "Segni, Italy",
   "lat": 41.691453,
   "lon": 13.022225,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Città della provincia romana di Italia. A city of Latium Adjectum established as a Latin colony ca. 494 B.C."
+  "esito": "Correzione: fondata come colonia latina nel 382 a.C. insieme a Setia, secondo Livio."
  },
  {
   "n": "Silandos",
@@ -20478,14 +20431,14 @@ const EVENTS = [
  {
   "n": "Sora",
   "lat_n": "Sora",
-  "ys": -89,
+  "ys": -303,
   "ye": 476,
   "luogo": "Sora, Italy",
   "lat": 41.715723,
   "lon": 13.614105,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Città della provincia romana di Italia. An ancient city of Latium located in the valley of the Liris river that likely had Volscian origins. The Romans captured the city in 345 BC and later established a colony there in 303 BC after the Second Samnite War."
+  "esito": "Correzione: citta' volsca, divenuta colonia romana nel 303 a.C. dopo la repressione di una rivolta, non genericamente dall'89 a.C."
  },
  {
   "n": "Splonum",
@@ -21524,14 +21477,14 @@ const EVENTS = [
  {
   "n": "Ulpiana",
   "lat_n": "Ulpiana",
-  "ys": 29,
+  "ys": 100,
   "ye": 602,
   "luogo": "Gračanica, Serbia",
   "lat": 42.5966506888,
   "lon": 21.1747485426,
   "era": "principato",
   "kind": "city",
-  "esito": "Città della provincia romana di Moesia Superior. An ancient place, cited: BAtlas 49 D1 Ulpiana"
+  "esito": "Correzione: il nome stesso 'Ulpiana' deriva dalla gens di Traiano; la citta' fu fondata o elevata a rango coloniale attorno al 100 d.C., non nel 29 d.C. — quasi settant'anni prima della sua stessa intitolazione."
  },
  {
   "n": "Uluzibbira",
@@ -21906,14 +21859,14 @@ const EVENTS = [
  {
   "n": "Abrincas",
   "lat_n": "Abrincas",
-  "ys": -27,
+  "ys": -51,
   "ye": 486,
   "luogo": "Avranches, France",
   "lat": 48.684527,
   "lon": -1.35640033333,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Città della provincia romana di Gallia Lugdunensis. Ingena/Abrincas (modern Avranches) was the chief settlement of the Abrincatui tribe."
+  "esito": "Città della provincia romana di Gallia Lugdunensis. Ingena/Abrincas (modern Avranches) was the chief settlement of the Abrincatui tribe. [Data corretta: -51 (fine della guerra gallica di Cesare) invece della generica riorganizzazione augustea del -27.]"
  },
  {
   "n": "Abydus",
@@ -21988,14 +21941,14 @@ const EVENTS = [
  {
   "n": "Agedincum",
   "lat_n": "Agedincum",
-  "ys": -27,
+  "ys": -51,
   "ye": 486,
   "luogo": "Sens, France",
   "lat": 48.1978885,
   "lon": 3.2855855,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Città della provincia romana di Gallia Lugdunensis. A settlement located at the Yonne-Vanne confluence in the territory of the Senones."
+  "esito": "Città della provincia romana di Gallia Lugdunensis. A settlement located at the Yonne-Vanne confluence in the territory of the Senones. [Data corretta: -51 (fine della guerra gallica di Cesare) invece della generica riorganizzazione augustea del -27.]"
  },
  {
   "n": "Aggar",
@@ -22034,14 +21987,14 @@ const EVENTS = [
  {
   "n": "Alauna",
   "lat_n": "Alauna",
-  "ys": -27,
+  "ys": -51,
   "ye": 486,
   "luogo": "Notre Dame d'Alleaume, France",
   "lat": 49.507826,
   "lon": -1.46282,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Città della provincia romana di Gallia Lugdunensis. An ancient place, cited: BAtlas 7 E2 Alauna"
+  "esito": "Città della provincia romana di Gallia Lugdunensis. An ancient place, cited: BAtlas 7 E2 Alauna [Data corretta: -51 (fine della guerra gallica di Cesare) invece della generica riorganizzazione augustea del -27.]"
  },
  {
   "n": "Albona",
@@ -22070,14 +22023,14 @@ const EVENTS = [
  {
   "n": "Alesia",
   "lat_n": "Alesia",
-  "ys": -27,
+  "ys": -51,
   "ye": 486,
   "luogo": "Alise S. Reine, France",
   "lat": 47.536622,
   "lon": 4.503884,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Città della provincia romana di Gallia Lugdunensis. A Gallic oppidum, site of Caesar's defeat of Vercingetorix, and afterwards a Gallo-Roman town"
+  "esito": "Città della provincia romana di Gallia Lugdunensis. A Gallic oppidum, site of Caesar's defeat of Vercingetorix, and afterwards a Gallo-Roman town [Data corretta: -51 (fine della guerra gallica di Cesare) invece della generica riorganizzazione augustea del -27.]"
  },
  {
   "n": "Alveria",
@@ -22154,14 +22107,14 @@ const EVENTS = [
  {
   "n": "Anderitum",
   "lat_n": "Anderitum",
-  "ys": -27,
+  "ys": -51,
   "ye": 486,
   "luogo": "Javols, France",
   "lat": 44.692481,
   "lon": 3.335894,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Città della provincia romana di Gallia Aquitania. An ancient place, cited: BAtlas 17 A4 Anderitum"
+  "esito": "Città della provincia romana di Gallia Aquitania. An ancient place, cited: BAtlas 17 A4 Anderitum [Data corretta: -51 (fine della guerra gallica di Cesare) invece della generica riorganizzazione augustea del -27.]"
  },
  {
   "n": "Andros",
@@ -22287,13 +22240,13 @@ const EVENTS = [
   "n": "Aptera",
   "lat_n": "Aptera",
   "ys": -67,
-  "ye": 645,
+  "ye": 824,
   "luogo": "Palaiokastro, Greece",
   "lat": 35.4629885,
   "lon": 24.1405648,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Città della provincia romana di Creta et Cyrenaica. An ancient place, cited: BAtlas 60 B2 Aptera"
+  "esito": "Città della provincia romana di Creta et Cyrenaica. An ancient place, cited: BAtlas 60 B2 Aptera [Corretto: Creta fu conquistata dagli Arabi solo nell'824 d.C. (sotto Abu Hafs), non nel 643-645 come la Cirenaica sulla terraferma libica — le due regioni erano amministrativamente unite in eta' romana ma ebbero sorti diverse.]"
  },
  {
   "n": "Aquae Statiellae",
@@ -22310,14 +22263,14 @@ const EVENTS = [
  {
   "n": "Aquae Tarbellicae",
   "lat_n": "Aquae Tarbellicae",
-  "ys": -27,
+  "ys": -51,
   "ye": 486,
   "luogo": "Aix les Bains, France",
   "lat": 43.709216,
   "lon": -1.0525105,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Città della provincia romana di Gallia Aquitania. An ancient place, cited: BAtlas 25 D2 Aquae Terebellicae"
+  "esito": "Città della provincia romana di Gallia Aquitania. An ancient place, cited: BAtlas 25 D2 Aquae Terebellicae [Data corretta: -51 (fine della guerra gallica di Cesare) invece della generica riorganizzazione augustea del -27.]"
  },
  {
   "n": "Aquilonia",
@@ -22358,14 +22311,14 @@ const EVENTS = [
  {
   "n": "Aregenua",
   "lat_n": "Aregenua",
-  "ys": -27,
+  "ys": -51,
   "ye": 486,
   "luogo": "Vieux, France",
   "lat": 49.10686765,
   "lon": -0.43271675,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Città della provincia romana di Gallia Lugdunensis. Aregenoua was the chief city of the civitas of the Viducasses."
+  "esito": "Città della provincia romana di Gallia Lugdunensis. Aregenoua was the chief city of the civitas of the Viducasses. [Data corretta: -51 (fine della guerra gallica di Cesare) invece della generica riorganizzazione augustea del -27.]"
  },
  {
   "n": "Argyruntum",
@@ -22442,38 +22395,38 @@ const EVENTS = [
  {
   "n": "Augusta Suessionum",
   "lat_n": "Augusta Suessionum",
-  "ys": -27,
+  "ys": -51,
   "ye": 486,
   "luogo": "Soissons, France",
   "lat": 49.380839,
   "lon": 3.3258515,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Città della provincia romana di Gallia Belgica. Augusta Suessionum (modern Soissons) was a Gallic site captured by Iulius Caesar and re-established as a Roman city."
+  "esito": "Città della provincia romana di Gallia Belgica. Augusta Suessionum (modern Soissons) was a Gallic site captured by Iulius Caesar and re-established as a Roman city. [Data corretta: -51 (fine della guerra gallica di Cesare) invece della generica riorganizzazione augustea del -27.]"
  },
  {
   "n": "Augusta Viromanduorum",
   "lat_n": "Augusta Viromanduorum",
-  "ys": -27,
+  "ys": -51,
   "ye": 486,
   "luogo": "S. Quentin, France",
   "lat": 49.847952,
   "lon": 3.2891755,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Città della provincia romana di Gallia Belgica. Augusta Viromanduorum was a Roman settlement that replaced a pre-Roman oppidum of the Viromandui."
+  "esito": "Città della provincia romana di Gallia Belgica. Augusta Viromanduorum was a Roman settlement that replaced a pre-Roman oppidum of the Viromandui. [Data corretta: -51 (fine della guerra gallica di Cesare) invece della generica riorganizzazione augustea del -27.]"
  },
  {
   "n": "Augustobona",
   "lat_n": "Augustobona",
-  "ys": -27,
+  "ys": -51,
   "ye": 486,
   "luogo": "Troyes, France",
   "lat": 48.297473,
   "lon": 4.074806,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Città della provincia romana di Gallia Lugdunensis. Augustobona Tricassium stood at a key highway hub on the Via Agrippa."
+  "esito": "Città della provincia romana di Gallia Lugdunensis. Augustobona Tricassium stood at a key highway hub on the Via Agrippa. [Data corretta: -51 (fine della guerra gallica di Cesare) invece della generica riorganizzazione augustea del -27.]"
  },
  {
   "n": "Augustobriga",
@@ -22490,26 +22443,26 @@ const EVENTS = [
  {
   "n": "Augustodurum",
   "lat_n": "Augustodurum",
-  "ys": -27,
+  "ys": -51,
   "ye": 486,
   "luogo": "Bayeux, France",
   "lat": 49.275312,
   "lon": -0.7052,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Città della provincia romana di Gallia Lugdunensis. An ancient place, cited: BAtlas 7 F2 Augustodurum"
+  "esito": "Città della provincia romana di Gallia Lugdunensis. An ancient place, cited: BAtlas 7 F2 Augustodurum [Data corretta: -51 (fine della guerra gallica di Cesare) invece della generica riorganizzazione augustea del -27.]"
  },
  {
   "n": "Augustomagus",
   "lat_n": "Augustomagus",
-  "ys": -27,
+  "ys": -51,
   "ye": 486,
   "luogo": "Senlis, France",
   "lat": 49.2051355,
   "lon": 2.585975,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Città della provincia romana di Gallia Lugdunensis. Augustomagus (modern Senlis) was located along the road between between Caesaromagus and Suessona."
+  "esito": "Città della provincia romana di Gallia Lugdunensis. Augustomagus (modern Senlis) was located along the road between between Caesaromagus and Suessona. [Data corretta: -51 (fine della guerra gallica di Cesare) invece della generica riorganizzazione augustea del -27.]"
  },
  {
   "n": "Aulon",
@@ -22562,14 +22515,14 @@ const EVENTS = [
  {
   "n": "Bagacum",
   "lat_n": "Bagacum",
-  "ys": -27,
+  "ys": -51,
   "ye": 486,
   "luogo": "Bavai, France",
   "lat": 50.2977855,
   "lon": 3.792415,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Città della provincia romana di Gallia Belgica. Bagacum was an ancient city located in Gallia Belgica and a capital of the Nervii."
+  "esito": "Città della provincia romana di Gallia Belgica. Bagacum was an ancient city located in Gallia Belgica and a capital of the Nervii. [Data corretta: -51 (fine della guerra gallica di Cesare) invece della generica riorganizzazione augustea del -27.]"
  },
  {
   "n": "Baiae",
@@ -22598,26 +22551,26 @@ const EVENTS = [
  {
   "n": "Beneharnum",
   "lat_n": "Beneharnum",
-  "ys": -27,
+  "ys": -51,
   "ye": 486,
   "luogo": "Lescar, France",
   "lat": 43.332678,
   "lon": -0.434655,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Città della provincia romana di Gallia Aquitania. An ancient place, cited: BAtlas 25 E2 Bene(h)arnum"
+  "esito": "Città della provincia romana di Gallia Aquitania. An ancient place, cited: BAtlas 25 E2 Bene(h)arnum [Data corretta: -51 (fine della guerra gallica di Cesare) invece della generica riorganizzazione augustea del -27.]"
  },
  {
   "n": "Bocchori",
   "lat_n": "Bocchori",
-  "ys": -218,
+  "ys": -123,
   "ye": 470,
   "luogo": "Bocchori, Spain",
   "lat": 39.911205,
   "lon": 3.079593,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Città della provincia romana di Hispania Tarraconensis. A pre-Roman and Roman settlement on the island of Majorca. Its ruins are known as Pedret de Bóquer, which is located at the modern Port de Pollença. The original settlement dates ca. 1400 BC."
+  "esito": "Correzione: le isole Baleari, incluso questo centro di Mallorca, furono conquistate da Quinto Cecilio Metello Baleareico nel 123 a.C. (data coerente con Palma de Mallorca, gia' in questo catalogo), non durante la seconda guerra punica."
  },
  {
   "n": "Boutae",
@@ -22740,14 +22693,14 @@ const EVENTS = [
  {
   "n": "Cabilonnum",
   "lat_n": "Cabilonnum",
-  "ys": -27,
+  "ys": -51,
   "ye": 486,
   "luogo": "Chalon sur Saône, France",
   "lat": 46.783372,
   "lon": 4.8560145,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Città della provincia romana di Gallia Lugdunensis. An ancient place, cited: BAtlas 18 B3 Cabilonnum"
+  "esito": "Città della provincia romana di Gallia Lugdunensis. An ancient place, cited: BAtlas 18 B3 Cabilonnum [Data corretta: -51 (fine della guerra gallica di Cesare) invece della generica riorganizzazione augustea del -27.]"
  },
  {
   "n": "Cadyanda",
@@ -22800,14 +22753,14 @@ const EVENTS = [
  {
   "n": "Camaracum",
   "lat_n": "Camaracum",
-  "ys": -27,
+  "ys": -51,
   "ye": 486,
   "luogo": "Cambrai, France",
   "lat": 50.175165,
   "lon": 3.234282,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Città della provincia romana di Gallia Belgica. Camaracum was the capital of the civitas of the Nervii."
+  "esito": "Città della provincia romana di Gallia Belgica. Camaracum was the capital of the civitas of the Nervii. [Data corretta: -51 (fine della guerra gallica di Cesare) invece della generica riorganizzazione augustea del -27.]"
  },
  {
   "n": "Candyba",
@@ -23098,14 +23051,14 @@ const EVENTS = [
  {
   "n": "Cosedia",
   "lat_n": "Cosedia",
-  "ys": -27,
+  "ys": -51,
   "ye": 486,
   "luogo": "Coutances, France",
   "lat": 49.0481625,
   "lon": -1.444318,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Città della provincia romana di Gallia Lugdunensis. An ancient place, cited: BAtlas 7 E2 Cosedia/Constantia"
+  "esito": "Città della provincia romana di Gallia Lugdunensis. An ancient place, cited: BAtlas 7 E2 Cosedia/Constantia [Data corretta: -51 (fine della guerra gallica di Cesare) invece della generica riorganizzazione augustea del -27.]"
  },
  {
   "n": "Cosilinum",
@@ -23216,38 +23169,38 @@ const EVENTS = [
  {
   "n": "Darioritum",
   "lat_n": "Darioritum",
-  "ys": -27,
+  "ys": -51,
   "ye": 486,
   "luogo": "Vannes, France",
   "lat": 47.654797,
   "lon": -2.75957,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Città della provincia romana di Gallia Lugdunensis. The primary city of the Veneti in Gallia Lugdunensis (modern Vannes)."
+  "esito": "Città della provincia romana di Gallia Lugdunensis. The primary city of the Veneti in Gallia Lugdunensis (modern Vannes). [Data corretta: -51 (fine della guerra gallica di Cesare) invece della generica riorganizzazione augustea del -27.]"
  },
  {
   "n": "Decem Pagi",
   "lat_n": "Decem Pagi",
-  "ys": -27,
+  "ys": -51,
   "ye": 486,
   "luogo": "Tarquimpol, France",
   "lat": 48.78451,
   "lon": 6.75762,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Città della provincia romana di Gallia Belgica. An ancient place, cited: BAtlas 11 G4 Decem Pagi"
+  "esito": "Città della provincia romana di Gallia Belgica. An ancient place, cited: BAtlas 11 G4 Decem Pagi [Data corretta: -51 (fine della guerra gallica di Cesare) invece della generica riorganizzazione augustea del -27.]"
  },
  {
   "n": "Decetia",
   "lat_n": "Decetia",
-  "ys": -27,
+  "ys": -51,
   "ye": 486,
   "luogo": "Decetia, France",
   "lat": 46.8282482222,
   "lon": 3.46142494445,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Città della provincia romana di Gallia Lugdunensis. An ancient place, cited: BAtlas 14 I2 Decetia"
+  "esito": "Città della provincia romana di Gallia Lugdunensis. An ancient place, cited: BAtlas 14 I2 Decetia [Data corretta: -51 (fine della guerra gallica di Cesare) invece della generica riorganizzazione augustea del -27.]"
  },
  {
   "n": "Delos",
@@ -23260,18 +23213,6 @@ const EVENTS = [
   "era": "repubblica",
   "kind": "city",
   "esito": "Città della provincia romana di Achaia. The ancient settlement of Delos, located on the Aegean island of the same name."
- },
- {
-  "n": "Dibio",
-  "lat_n": "Dibio",
-  "ys": -27,
-  "ye": 486,
-  "luogo": "Dijon, France",
-  "lat": 47.327186,
-  "lon": 5.044076,
-  "era": "repubblica",
-  "kind": "city",
-  "esito": "Città della provincia romana di Gallia Lugdunensis. An ancient place, cited: BAtlas 18 C2 Castrum Divionense"
  },
  {
   "n": "Diospolis Inferior",
@@ -23348,14 +23289,14 @@ const EVENTS = [
  {
   "n": "Elimberrum Augusta Auscorum",
   "lat_n": "Elimberrum Augusta Auscorum",
-  "ys": -27,
+  "ys": -51,
   "ye": 486,
   "luogo": "Auch, France",
   "lat": 43.647434,
   "lon": 0.585694,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Città della provincia romana di Gallia Aquitania. Elimberrum was the capital of the civitas of the Auscii."
+  "esito": "Città della provincia romana di Gallia Aquitania. Elimberrum was the capital of the civitas of the Auscii. [Data corretta: -51 (fine della guerra gallica di Cesare) invece della generica riorganizzazione augustea del -27.]"
  },
  {
   "n": "Epamanduodurum",
@@ -23444,14 +23385,14 @@ const EVENTS = [
  {
   "n": "Fanum Martis",
   "lat_n": "Fanum Martis",
-  "ys": -27,
+  "ys": -51,
   "ye": 486,
   "luogo": "Corseul, France",
   "lat": 50.311862,
   "lon": 3.517835,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Città della provincia romana di Gallia Belgica. An ancient place, cited: BAtlas 11 D2 Fanum Martis"
+  "esito": "Città della provincia romana di Gallia Belgica. An ancient place, cited: BAtlas 11 D2 Fanum Martis [Data corretta: -51 (fine della guerra gallica di Cesare) invece della generica riorganizzazione augustea del -27.]"
  },
  {
   "n": "Feltria",
@@ -23598,28 +23539,16 @@ const EVENTS = [
   "esito": "Città della provincia romana di Italia. Forum Popilii on the Via Aemilia was founded in 173 BC by M. Popilius Laenas."
  },
  {
-  "n": "Forum Popillii",
-  "lat_n": "Forum Popillii",
-  "ys": -89,
-  "ye": 476,
-  "luogo": "Forum Popillii, Italy",
-  "lat": 41.17202,
-  "lon": 13.966869,
-  "era": "repubblica",
-  "kind": "city",
-  "esito": "Città della provincia romana di Italia. An important town of the Ager Falernus, not to be confused with Forum Popili, the modern Polla."
- },
- {
   "n": "Forum Segusiavorum",
   "lat_n": "Forum Segusiavorum",
-  "ys": -27,
+  "ys": -51,
   "ye": 486,
   "luogo": "Feurs, France",
   "lat": 45.743773,
   "lon": 4.222007,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Città della provincia romana di Gallia Lugdunensis. Forum Segusiavorum (Feurs) was a Roman market town at the junction of several major road systems."
+  "esito": "Città della provincia romana di Gallia Lugdunensis. Forum Segusiavorum (Feurs) was a Roman market town at the junction of several major road systems. [Data corretta: -51 (fine della guerra gallica di Cesare) invece della generica riorganizzazione augustea del -27.]"
  },
  {
   "n": "Forum Sempronii",
@@ -23697,25 +23626,25 @@ const EVENTS = [
   "n": "Glanum",
   "lat_n": "Glanum",
   "ys": -118,
-  "ye": 486,
+  "ye": 270,
   "luogo": "S. Remy de Provence, France",
   "lat": 43.773471,
   "lon": 4.832867,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Città della provincia romana di Gallia Narbonensis. Glanum was a Celtic oppidum that became a Roman city; it was eventually abandoned in the third century AD."
+  "esito": "Correzione: il sito fu abbandonato attorno al 260-270 d.C. dopo le incursioni degli Alemanni, con la popolazione trasferitasi nella vicina Glanum Novum (l'odierna Saint-Remy-de-Provence); non conobbe quindi continuita' di occupazione fino al 486 come genericamente assunto."
  },
  {
   "n": "Gracchuris",
   "lat_n": "Gracchuris",
-  "ys": -218,
+  "ys": -179,
   "ye": 470,
   "luogo": "Alfaro, Spain",
   "lat": 42.178586,
   "lon": -1.749327,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Città della provincia romana di Hispania Tarraconensis. An ancient place, cited: BAtlas 25 D3 Ilurcis/Grac(ch)urris"
+  "esito": "Correzione: la citta' prende il nome dal suo stesso fondatore, il proconsole Tiberio Sempronio Gracco, che la fondo' nel 179 a.C. su un preesistente insediamento celtiberico (Ilurcis) — non puo' quindi risalire al 218 a.C., prima ancora della sua fondazione."
  },
  {
   "n": "Halae",
@@ -23924,14 +23853,14 @@ const EVENTS = [
  {
   "n": "Iatinum",
   "lat_n": "Iatinum",
-  "ys": -27,
+  "ys": -51,
   "ye": 486,
   "luogo": "Meaux, France",
   "lat": 48.9576983333,
   "lon": 2.88036466667,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Città della provincia romana di Gallia Lugdunensis. Iatinon/Fixtuinum was a city of the the city of the Meldi, a people of Gallia Lugdunensis."
+  "esito": "Città della provincia romana di Gallia Lugdunensis. Iatinon/Fixtuinum was a city of the the city of the Meldi, a people of Gallia Lugdunensis. [Data corretta: -51 (fine della guerra gallica di Cesare) invece della generica riorganizzazione augustea del -27.]"
  },
  {
   "n": "Idebessus",
@@ -24044,14 +23973,14 @@ const EVENTS = [
  {
   "n": "Iuliobona",
   "lat_n": "Iuliobona",
-  "ys": -27,
+  "ys": -51,
   "ye": 486,
   "luogo": "Lillebonne, France",
   "lat": 49.5196055,
   "lon": 0.53567465,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Città della provincia romana di Gallia Lugdunensis. A settlement of the Caletes in Gallia Belgica"
+  "esito": "Città della provincia romana di Gallia Lugdunensis. A settlement of the Caletes in Gallia Belgica [Data corretta: -51 (fine della guerra gallica di Cesare) invece della generica riorganizzazione augustea del -27.]"
  },
  {
   "n": "Iulium Carnicum",
@@ -24412,14 +24341,14 @@ const EVENTS = [
  {
   "n": "Mediolanum Aulercorum",
   "lat_n": "Mediolanum Aulercorum",
-  "ys": -27,
+  "ys": -51,
   "ye": 486,
   "luogo": "Evreux, France",
   "lat": 49.024342,
   "lon": 1.151012,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Città della provincia romana di Gallia Lugdunensis. Mediolanum Aulercorum was the chief town of the Aulerci Eburovices."
+  "esito": "Città della provincia romana di Gallia Lugdunensis. Mediolanum Aulercorum was the chief town of the Aulerci Eburovices. [Data corretta: -51 (fine della guerra gallica di Cesare) invece della generica riorganizzazione augustea del -27.]"
  },
  {
   "n": "Melos",
@@ -24530,14 +24459,14 @@ const EVENTS = [
  {
   "n": "Nasium",
   "lat_n": "Nasium",
-  "ys": -27,
+  "ys": -51,
   "ye": 486,
   "luogo": "Naix aux Forges and Saint Amand sur Ornain, France",
   "lat": 48.6324949397,
   "lon": 5.3866037078,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Città della provincia romana di Gallia Belgica. A large ancient settlement located in the vicinity of modern Naix-aux-Forges and Saint-Armand-sur-Ornain in France. Excavations began in the 19th century and continued in the 20th."
+  "esito": "Città della provincia romana di Gallia Belgica. A large ancient settlement located in the vicinity of modern Naix-aux-Forges and Saint-Armand-sur-Ornain in France. Excavations began in the 19th century and continued in the 20th. [Data corretta: -51 (fine della guerra gallica di Cesare) invece della generica riorganizzazione augustea del -27.]"
  },
  {
   "n": "Naxus",
@@ -24626,26 +24555,26 @@ const EVENTS = [
  {
   "n": "Noviodunum Diablintum",
   "lat_n": "Noviodunum Diablintum",
-  "ys": -27,
+  "ys": -51,
   "ye": 486,
   "luogo": "Jublains, France",
   "lat": 48.2575044797,
   "lon": -0.496072813221,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Città della provincia romana di Gallia Lugdunensis. Noiodounon Diablintum is a settlement with significant extant remains, located at modern Jublains in France."
+  "esito": "Città della provincia romana di Gallia Lugdunensis. Noiodounon Diablintum is a settlement with significant extant remains, located at modern Jublains in France. [Data corretta: -51 (fine della guerra gallica di Cesare) invece della generica riorganizzazione augustea del -27.]"
  },
  {
   "n": "Noviomagus Lexoviorum",
   "lat_n": "Noviomagus Lexoviorum",
-  "ys": -27,
+  "ys": -51,
   "ye": 486,
   "luogo": "Lisieux, France",
   "lat": 49.1459835,
   "lon": 0.2279715,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Città della provincia romana di Gallia Lugdunensis. Noviomagus Lexoviorum, located at the confluence of the Orbiquet and Touques rivers, was the chief settlement of the Lexovii."
+  "esito": "Città della provincia romana di Gallia Lugdunensis. Noviomagus Lexoviorum, located at the confluence of the Orbiquet and Touques rivers, was the chief settlement of the Lexovii. [Data corretta: -51 (fine della guerra gallica di Cesare) invece della generica riorganizzazione augustea del -27.]"
  },
  {
   "n": "Numana",
@@ -24948,26 +24877,26 @@ const EVENTS = [
  {
   "n": "Pons Saravi",
   "lat_n": "Pons Saravi",
-  "ys": -27,
+  "ys": -51,
   "ye": 486,
   "luogo": "Sarrebourg, France",
   "lat": 48.734948,
   "lon": 7.051854,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Città della provincia romana di Gallia Belgica. A road station between Tarquimpol and Saverne."
+  "esito": "Città della provincia romana di Gallia Belgica. A road station between Tarquimpol and Saverne. [Data corretta: -51 (fine della guerra gallica di Cesare) invece della generica riorganizzazione augustea del -27.]"
  },
  {
   "n": "Portus Blendium",
   "lat_n": "Portus Blendium",
-  "ys": -218,
+  "ys": -19,
   "ye": 470,
   "luogo": "Portus Blendium, Spain",
   "lat": 43.4265175,
   "lon": -4.041993,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Città della provincia romana di Hispania Tarraconensis. An ancient place, cited: BAtlas 24 G1 Portus Blendium"
+  "esito": "Correzione: questo porto si trova sulla costa cantabrica, regione che rimase indipendente e ostile a Roma fino alla conclusione delle guerre cantabriche di Augusto (29-19 a.C., gia' ampiamente presenti in questo catalogo); non poteva quindi essere sotto controllo romano gia' dal 218 a.C., in pieno periodo della seconda guerra punica."
  },
  {
   "n": "Portus Magnus",
@@ -25062,14 +24991,14 @@ const EVENTS = [
  {
   "n": "Ratiatum",
   "lat_n": "Ratiatum",
-  "ys": -27,
+  "ys": -51,
   "ye": 486,
   "luogo": "Rezé, France",
   "lat": 47.183153,
   "lon": -1.546397,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Città della provincia romana di Gallia Aquitania. A site in the Loire estuary that served as a port."
+  "esito": "Città della provincia romana di Gallia Aquitania. A site in the Loire estuary that served as a port. [Data corretta: -51 (fine della guerra gallica di Cesare) invece della generica riorganizzazione augustea del -27.]"
  },
  {
   "n": "Rhodiapolis",
@@ -25170,26 +25099,26 @@ const EVENTS = [
  {
   "n": "Samarobriva Ambianorum",
   "lat_n": "Samarobriva Ambianorum",
-  "ys": -27,
+  "ys": -51,
   "ye": 486,
   "luogo": "Samarobriva Ambianorum, France",
   "lat": 49.8936075,
   "lon": 2.297948,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Città della provincia romana di Gallia Belgica. A city of Gallia Belgica located on the Somme that is mentioned in Caesar's commentaries."
+  "esito": "Città della provincia romana di Gallia Belgica. A city of Gallia Belgica located on the Somme that is mentioned in Caesar's commentaries. [Data corretta: -51 (fine della guerra gallica di Cesare) invece della generica riorganizzazione augustea del -27.]"
  },
  {
   "n": "Scolacium Minervia",
   "lat_n": "Scolacium Minervia",
-  "ys": -89,
+  "ys": 97,
   "ye": 476,
   "luogo": "Catanzaro, Italy",
   "lat": 38.8078147047,
   "lon": 16.594442994,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Città della provincia romana di Italia. Scylletium/Scolacium was an ancient settlement in Bruttium located on the Gulf of Squillace."
+  "esito": "Correzione: il nome 'Minervia' deriva dalla rifondazione come colonia sotto Nerva (regno 96-98 d.C., che pose Minerva tra le proprie divinita' protettrici), non poteva quindi risalire all'89 a.C. Un insediamento precedente (la greca Skylletion) esisteva comunque da secoli."
  },
  {
   "n": "Segobriga",
@@ -25338,14 +25267,14 @@ const EVENTS = [
  {
   "n": "Tarvenna",
   "lat_n": "Tarvenna",
-  "ys": -27,
+  "ys": -51,
   "ye": 486,
   "luogo": "Therouanne, France",
   "lat": 50.635487,
   "lon": 2.256822,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Città della provincia romana di Gallia Belgica. An ancient place, cited: BAtlas 11 C2 Tarvenna"
+  "esito": "Città della provincia romana di Gallia Belgica. An ancient place, cited: BAtlas 11 C2 Tarvenna [Data corretta: -51 (fine della guerra gallica di Cesare) invece della generica riorganizzazione augustea del -27.]"
  },
  {
   "n": "Teanum Sidicinum",
@@ -25630,14 +25559,14 @@ const EVENTS = [
  {
   "n": "Tullum",
   "lat_n": "Tullum",
-  "ys": -27,
+  "ys": -51,
   "ye": 486,
   "luogo": "Toul, France",
   "lat": 48.679364,
   "lon": 5.8947805,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Città della provincia romana di Gallia Belgica. Tullum was the capital of the civitas Leucorum."
+  "esito": "Città della provincia romana di Gallia Belgica. Tullum was the capital of the civitas Leucorum. [Data corretta: -51 (fine della guerra gallica di Cesare) invece della generica riorganizzazione augustea del -27.]"
  },
  {
   "n": "Uxama",
@@ -25840,14 +25769,14 @@ const EVENTS = [
  {
   "n": "Vindobriga",
   "lat_n": "Vindobriga",
-  "ys": -27,
+  "ys": -51,
   "ye": 486,
   "luogo": "Vendoeuvres en Brenne, France",
   "lat": 46.801194,
   "lon": 1.354989,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Città della provincia romana di Gallia Aquitania. An ancient place, cited: BAtlas 14 G2 Vendoeuvres-en-Brenne"
+  "esito": "Città della provincia romana di Gallia Aquitania. An ancient place, cited: BAtlas 14 G2 Vendoeuvres-en-Brenne [Data corretta: -51 (fine della guerra gallica di Cesare) invece della generica riorganizzazione augustea del -27.]"
  },
  {
   "n": "Virovesca",
@@ -25876,14 +25805,14 @@ const EVENTS = [
  {
   "n": "Vorgium",
   "lat_n": "Vorgium",
-  "ys": -27,
+  "ys": -51,
   "ye": 486,
   "luogo": "Carhaix, France",
   "lat": 48.276532,
   "lon": -3.571121,
   "era": "repubblica",
   "kind": "city",
-  "esito": "Città della provincia romana di Gallia Lugdunensis. An ancient place, cited: BAtlas 7 C3 Vorgium"
+  "esito": "Città della provincia romana di Gallia Lugdunensis. An ancient place, cited: BAtlas 7 C3 Vorgium [Data corretta: -51 (fine della guerra gallica di Cesare) invece della generica riorganizzazione augustea del -27.]"
  },
  {
   "n": "Xois",
@@ -26046,6 +25975,270 @@ const EVENTS = [
     1204
    ]
   ]
+ },
+ {
+  "n": "Waldgirmes",
+  "lat_n": "Forum (?) in Germania Magna",
+  "ys": 4,
+  "ye": 9,
+  "luogo": "Lahnau-Waldgirmes, Germania",
+  "lat": 50.5167,
+  "lon": 8.5167,
+  "era": "principato",
+  "kind": "city",
+  "esito": "Unico centro civile romano mai fondato oltre il Reno, con foro e statua equestre dorata dell'imperatore: abbandonato precipitosamente dopo il disastro di Teutoburgo del 9 d.C., a soli 5 anni dalla fondazione."
+ },
+ {
+  "n": "Haltern am See",
+  "lat_n": "Castra in Germania Magna",
+  "ys": -11,
+  "ye": 9,
+  "luogo": "Haltern am See, Germania",
+  "lat": 51.7422,
+  "lon": 7.1875,
+  "era": "principato",
+  "kind": "city",
+  "esito": "Grande base legionaria sulla Lippe, principale caposaldo dell'avanzata augustea in Germania; evacuata e data alle fiamme dopo Teutoburgo."
+ },
+ {
+  "n": "Anreppen",
+  "lat_n": "Castra in Germania Magna",
+  "ys": -4,
+  "ye": 9,
+  "luogo": "Delbrück-Anreppen, Germania",
+  "lat": 51.7742,
+  "lon": 8.5647,
+  "era": "principato",
+  "kind": "city",
+  "esito": "Accampamento legionario sulla Lippe, avamposto più orientale della rete di basi augustee in Germania Magna."
+ },
+ {
+  "n": "Oberaden",
+  "lat_n": "Castra in Germania Magna",
+  "ys": -11,
+  "ye": -8,
+  "luogo": "Bergkamen-Oberaden, Germania",
+  "lat": 51.6297,
+  "lon": 7.6469,
+  "era": "principato",
+  "kind": "city",
+  "esito": "Il più grande accampamento legionario mai costruito in Germania Magna, occupato solo pochi anni durante le prime campagne di Druso."
+ },
+ {
+  "n": "Marktbreit",
+  "lat_n": "Castra in Germania Magna",
+  "ys": -9,
+  "ye": -8,
+  "luogo": "Marktbreit, Germania",
+  "lat": 49.6667,
+  "lon": 10.15,
+  "era": "principato",
+  "kind": "city",
+  "esito": "Base legionaria sul Meno, avamposto più profondo della breve espansione romana verso l'Elba."
+ },
+ {
+  "n": "Tigranocerta (citta)",
+  "lat_n": "Tigranocerta",
+  "ys": -69,
+  "ye": 118,
+  "luogo": "Presso Silvan, Turchia",
+  "lat": 38.14,
+  "lon": 41.0,
+  "era": "repubblica",
+  "kind": "city",
+  "esito": "Capitale del regno armeno di Tigrane il Grande; dopo la sconfitta del 69 a.C. (gia' in questo catalogo) l'Armenia resta a lungo regno cliente conteso tra Roma e Partia, fino alla breve annessione di Traiano."
+ },
+ {
+  "n": "Artagera",
+  "lat_n": "Artagera",
+  "ys": -36,
+  "ye": 118,
+  "luogo": "Est della Turchia (localizzazione incerta)",
+  "lat": 39.5,
+  "lon": 42.5,
+  "era": "repubblica",
+  "kind": "city",
+  "esito": "Fortezza armena, teatro di un fallito assedio romano nel 36 a.C. (spedizione partica di Antonio); l'Armenia rimane poi regno cliente romano-partico per oltre un secolo."
+ },
+ {
+  "n": "Theodosiopolis (Karin)",
+  "lat_n": "Karin",
+  "ys": 114,
+  "ye": 118,
+  "luogo": "Erzurum, Turchia",
+  "lat": 39.9,
+  "lon": 41.27,
+  "era": "principato",
+  "kind": "city",
+  "esito": "Centro dell'altopiano armeno annesso da Traiano come provincia di Armenia nel 114 d.C.; Adriano, appena succeduto, abbandona la provincia gia' nel 118 restaurando il regno cliente."
+ },
+ {
+  "n": "Elegeia",
+  "lat_n": "Elegeia",
+  "ys": 114,
+  "ye": 118,
+  "luogo": "Presso Erzurum, Turchia",
+  "lat": 39.8,
+  "lon": 41.5,
+  "era": "principato",
+  "kind": "city",
+  "esito": "Localita' dove nel 114 d.C. il re armeno Partamasiride si sottomette a Traiano, che ne depone la dinastia annettendo brevemente l'Armenia come provincia romana."
+ },
+ {
+  "n": "Satala",
+  "lat_n": "Satala",
+  "ys": 70,
+  "ye": 451,
+  "luogo": "Sadak, Turchia",
+  "lat": 39.9667,
+  "lon": 39.65,
+  "era": "principato",
+  "kind": "city",
+  "esito": "Base della XV legione Apollinare, principale caposaldo romano-bizantino sulla frontiera armena; gia' presente in questo catalogo come sede della battaglia di Melitene-Satala ma mai come localita' persistente."
+ },
+ {
+  "n": "Napoca",
+  "lat_n": "Napoca",
+  "ys": 106,
+  "ye": 271,
+  "luogo": "Cluj-Napoca, Romania",
+  "lat": 46.7712,
+  "lon": 23.6236,
+  "era": "principato",
+  "kind": "city",
+  "esito": "Municipium e poi colonia romana della Dacia, distinta dal moderno centro di Cluj che ne riprende il nome solo in epoca contemporanea."
+ },
+ {
+  "n": "Potaissa",
+  "lat_n": "Potaissa",
+  "ys": 106,
+  "ye": 271,
+  "luogo": "Turda, Romania",
+  "lat": 46.5667,
+  "lon": 23.7833,
+  "era": "principato",
+  "kind": "city",
+  "esito": "Sede della V legione Macedonica in Dacia, una delle citta' meglio fortificate della provincia."
+ },
+ {
+  "n": "Sarmizegetusa Regia",
+  "lat_n": "Sarmizegetusa Regia (capitale dacica)",
+  "ys": -82,
+  "ye": 106,
+  "luogo": "Grădiștea de Munte, Romania",
+  "lat": 45.6144,
+  "lon": 23.3181,
+  "era": "repubblica",
+  "kind": "city",
+  "esito": "Capitale religiosa e politica del regno dacico di Decebalo, distinta dalla successiva colonia romana di Ulpia Traiana Sarmizegetusa (gia' in questo catalogo): distrutta da Traiano nel 106 d.C. al termine delle guerre daciche."
+ },
+ {
+  "n": "Inchtuthil",
+  "lat_n": "Pinnata Castra",
+  "ys": 83,
+  "ye": 87,
+  "luogo": "Perthshire, Scozia",
+  "lat": 56.5561,
+  "lon": -3.4497,
+  "era": "principato",
+  "kind": "city",
+  "esito": "Fortezza legionaria costruita da Agricola dopo la vittoria di Mons Graupius (83 d.C., gia' in questo catalogo), avamposto piu' settentrionale mai occupato da una legione romana intera; smantellata dopo soli 4 anni con il ritiro dalla Scozia."
+ },
+ {
+  "n": "Trimontium",
+  "lat_n": "Trimontium",
+  "ys": 79,
+  "ye": 211,
+  "luogo": "Newstead, Scozia",
+  "lat": 55.5967,
+  "lon": -2.6733,
+  "era": "principato",
+  "kind": "city",
+  "esito": "Il piu' importante forte romano di Scozia, occupato a fasi alterne per oltre un secolo attraverso tre distinte campagne (Agricola, Antonino Pio, Settimio Severo)."
+ },
+ {
+  "n": "Ardoch",
+  "lat_n": "Alauna (Gask Ridge)",
+  "ys": 79,
+  "ye": 211,
+  "luogo": "Perthshire, Scozia",
+  "lat": 56.2833,
+  "lon": -3.7333,
+  "era": "principato",
+  "kind": "city",
+  "esito": "Forte della linea del Gask Ridge, la piu' antica frontiera fortificata dell'impero romano, costruita da Agricola come base per l'avanzata verso nord."
+ },
+ {
+  "n": "Bertha",
+  "lat_n": "Bertha",
+  "ys": 79,
+  "ye": 163,
+  "luogo": "Perth, Scozia",
+  "lat": 56.4167,
+  "lon": -3.4667,
+  "era": "principato",
+  "kind": "city",
+  "esito": "Forte romano alla confluenza di Tay e Almond, avamposto della linea del Gask Ridge in Scozia centrale."
+ },
+ {
+  "n": "Cramond",
+  "lat_n": "Cramond",
+  "ys": 142,
+  "ye": 211,
+  "luogo": "Edimburgo, Scozia",
+  "lat": 55.9764,
+  "lon": -3.3006,
+  "era": "principato",
+  "kind": "city",
+  "esito": "Forte costiero presso l'estuario del Forth, occupato durante la costruzione del Vallo Antonino e di nuovo sotto Settimio Severo."
+ },
+ {
+  "n": "Carpow",
+  "lat_n": "Carpow",
+  "ys": 208,
+  "ye": 211,
+  "luogo": "Perthshire, Scozia",
+  "lat": 56.345,
+  "lon": -3.2,
+  "era": "principato",
+  "kind": "city",
+  "esito": "Base legionaria sul Tay costruita da Settimio Severo per la sua campagna contro i Caledoni (208-211 d.C.), la piu' ambiziosa spedizione romana in Scozia dopo Agricola."
+ },
+ {
+  "n": "Fectio",
+  "lat_n": "Fectio (Vechten)",
+  "ys": 4,
+  "ye": 270,
+  "luogo": "Bunnik, Paesi Bassi",
+  "lat": 52.0667,
+  "lon": 5.15,
+  "era": "principato",
+  "kind": "city",
+  "esito": "Base navale della flotta renana romana (Classis Germanica), snodo chiave della difesa del limes olandese."
+ },
+ {
+  "n": "Mariana",
+  "lat_n": "Mariana",
+  "ys": -93,
+  "ye": 600,
+  "luogo": "Presso Lucciana, Corsica",
+  "lat": 42.5667,
+  "lon": 9.4667,
+  "era": "repubblica",
+  "kind": "city",
+  "esito": "Colonia romana fondata da Mario in Corsica, insieme alla piu' antica Aleria (gia' in questo catalogo) uno dei due principali centri romani dell'isola."
+ },
+ {
+  "n": "Neapolis Sardiniae",
+  "lat_n": "Neapolis",
+  "ys": -46,
+  "ye": 456,
+  "luogo": "Guspini, Sardegna",
+  "lat": 39.5833,
+  "lon": 8.5833,
+  "era": "repubblica",
+  "kind": "city",
+  "esito": "Municipium romano sulla costa occidentale della Sardegna."
  }
 ];
 
@@ -26797,76 +26990,100 @@ const ROADS = [
     38.3128
    ],
    [
-    39.2103,
-    38.3391
+    39.119,
+    38.3612
    ],
    [
-    38.4927,
-    38.35
+    39.102,
+    38.4416
    ],
    [
-    39.1165,
-    38.3695
+    39.1111,
+    38.5194
    ],
    [
-    39.0974,
-    38.4264
+    38.9906,
+    38.6802
    ],
    [
-    39.4598,
-    38.4653
+    38.8383,
+    38.6334
    ],
    [
-    39.4883,
-    38.5064
+    38.7455,
+    38.4489
    ],
    [
-    39.5182,
-    38.5551
+    38.5558,
+    38.3494
    ],
    [
-    39.5527,
-    38.6318
+    39.0349,
+    38.7159
    ],
    [
-    38.8479,
-    38.6726
+    39.1151,
+    38.5739
    ],
    [
-    39.5942,
-    38.7189
+    39.2508,
+    38.3553
    ],
    [
-    38.9976,
-    38.7461
+    39.3597,
+    38.3443
    ],
    [
-    39.5983,
-    38.8522
+    39.4528,
+    38.4452
    ],
    [
-    39.612,
-    39.0302
+    39.5045,
+    38.5153
    ],
    [
-    39.6102,
-    39.1453
+    39.5585,
+    38.6436
    ],
    [
-    39.7085,
-    39.4187
+    39.5981,
+    38.7361
    ],
    [
-    39.8112,
-    39.489
+    39.5952,
+    38.7992
    ],
    [
-    39.8908,
-    39.5666
+    39.5969,
+    38.8951
    ],
    [
-    40.0075,
-    39.6187
+    39.6136,
+    39.0407
+   ],
+   [
+    39.6109,
+    39.1096
+   ],
+   [
+    39.6335,
+    39.3017
+   ],
+   [
+    39.7986,
+    39.4792
+   ],
+   [
+    39.8408,
+    39.5144
+   ],
+   [
+    39.8925,
+    39.567
+   ],
+   [
+    39.9872,
+    39.606
    ]
   ],
   "source": "Itiner-e (De Soto, Pazout, Brughmans et al. 2025, CC BY 4.0)"
@@ -27353,6 +27570,7 @@ function filterToggleId(ev){
   if(ev.kind === 'siege_imposed') return 'siegeImposedToggle';
   if(ev.kind === 'siege_suffered') return 'siegeSufferedToggle';
   if(ev.kind === 'revolt') return 'revoltToggle';
+  if(!ev.kind) return 'landmarkToggle';
   return null;
 }
 
